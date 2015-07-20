@@ -1,0 +1,33 @@
+*{
+    -webkit-appearance: none;
+}
+body {
+    font-family: Verdana, Helvetica, sans-serif;
+    background-color: white;
+    width: 80%;
+    margin: auto;
+}
+
+header {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+ul {
+    list-style: none;
+    overflow: hidden;
+}
+
+.nav {
+    float: right;
+    margin: 5px;
+}
+
+.titulo{
+    text-align: center;
+    color: #8c4418;
+}
+
+.newdessert {
+    float: left;
+}
