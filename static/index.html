@@ -2,13 +2,13 @@
 <html ng-app='app'>
 <head>
     <link type="text/css" rel="stylesheet" href="stylesheets/main.css" />
-   <!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>-->
-    <script src="js/angular-1.3.0/angular.js"></script>
+   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+    <!--<script src="js/angular-1.3.0/angular.js"></script>-->
     <script  type="text/javascript" src="js/app.js" ></script>
     <meta charset="UTF-8">
     <title>DoceClara</title>
 </head>
-<body ng-controller="DessertController as control">
+<body ng-controller="AddDessertController as addCtrl">
     <header>
         <nav>
             <ul>
@@ -28,29 +28,35 @@
         <h1> Adicionar Sobremesa</h1>
         <br/>
         <div>
-            <form style="overflow: hidden;">
+            <form style="overflow: hidden;" novalidate>
                 <div class="newDessert">
                     <label for="dessertName">Nome:</label>
-                    <input  type="text" id="dessertName" name="dessertName" />
+                    <input  type="text" id="dessertName" name="dessertName" ng-model="addCtrl.dessert.name" />
                 </div>
-                <div class="newDessert">
-                    <label for="ingredients">Ingredientes: </label>
-                    <div class="ingredientField">
-                        <div class="buttonSeparator"></div>
-                        <button id="ingredients" class="ingredientButton" title="Novo Ingrediente"> <span class="ui-icon-plus"></span>+</button>
+
+                    <div class="newDessert">
+                        <p>Ingredientes: </p>
+                        <div class="ingredientField">
+                            <div class="buttonSeparator"></div>
+                            <button id="ingredients" class="ingredientButton" title="Novo Ingrediente" ng-click="addCtrl.setNewIngrtFlag(true)"> <span class="ui-icon-plus">+</span></button>
+                        </div>
                     </div>
-                </div>
+
                 <div class="newDessert">
                     <label for="portionAmount">Número de Porções:</label>
-                    <input type="number" id="portionAmount" name="portionAmount" />
+                    <input type="number" id="portionAmount" name="portionAmount" min="0" ng-model="addCtrl.dessert.portionAmount"/>
                 </div>
                 <div class="newDessert">
                     <p> Preço de custo:</p>
-                    <p id="portionCost" class="portionCost">$0,80 </p>
+                    <p id="portionCost" class="portionCost">{{addCtrl.dessert.price}}</p>
                 </div>
                 <div class="newDessert">
-                    <label for="salePrice">Preço de venda: </label>
-                    <input type="number" id="salePrice" name="salePrice" />
+                    <label for="cookerName">Cozinheiro: </label>
+                    <input type="text" id="cookerName" name="cookerName" ng-model="addCtrl.dessert.cookerName"/>
+                </div>
+                <div>
+                    <button id="backToList">Voltar</button>
+                    <button id="addDessert" ng-click="addCtrl.addDessert()">Adicionar</button>
                 </div>
             </form>
         </div>

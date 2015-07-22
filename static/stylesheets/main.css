@@ -48,6 +48,7 @@ ul {
 }
 
 .ingredientField {
+    height: 45px;
     overflow: hidden;
 }
 
@@ -57,6 +58,7 @@ ul {
 	height: 40px;
     background-color: white;
     border-color: #000000;
+    border-style: dotted;
 	-moz-border-radius: 20px;
 	-webkit-border-radius: 20px;
 }

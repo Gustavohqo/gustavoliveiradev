@@ -131,6 +131,7 @@
 #     ('/', MainPage),
 #     ('/sign', Guestbook),
 # ], debug=True)
+import logging
 
 __author__ = 'Gustavo'
 import cgi
@@ -138,6 +139,7 @@ import urllib
 
 from google.appengine.ext import ndb
 import json
+
 
 import webapp2
 
@@ -154,11 +156,22 @@ class Dessert(ndb.Model):
     ingredient = ndb.StructuredProperty(Ingredient, repeated=True)
     numb_of_portions = ndb.IntegerProperty(indexed=False)
     portion_cost = ndb.BooleanProperty(indexed=False)
+    cooker_name = ndb.StringProperty(indexed=False)
 
 class Main(webapp2.RequestHandler):
     def get(self):
-        print("LOG: Get")
+        logging.debug("LOG: GET-TEST")
         self.response.out.write("BEM VINDO")
+
+    def post(self):
+        logging.debug("LOG: POST-")
+        dessert = json.loads(self.request.body)
+
+        newDessert = Dessert()
+        newDessert.name = dessert["name"]
+
+        self.response.write(newDessert.name)
+
 
 
 app = webapp2.WSGIApplication([
