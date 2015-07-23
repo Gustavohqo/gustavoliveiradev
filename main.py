@@ -159,6 +159,15 @@ class Dessert(ndb.Model):
     portion_cost = ndb.FloatProperty(indexed=False)
     cooker_name = ndb.StringProperty(indexed=False)
 
+class Client(ndb.Model):
+    """Model Cliente"""
+    name = ndb.StringProperty(indexed=False)
+    telephone = ndb.StringProperty(indexed=False)
+    request = ndb.StringProperty(indexed=False)
+    request_quant = ndb.IntegerProperty(indexed=False)
+    dessert_cost = ndb.BooleanProperty(indexed=False)
+
+
 class Main(webapp2.RequestHandler):
     def get(self):
         logging.debug("LOG: GET-TEST")
@@ -173,8 +182,18 @@ class Main(webapp2.RequestHandler):
 
         self.response.write(newDessert.name)
 
+    def post(self):
+        logging.debug("LOG: POST-")
+        client = json.loads(self.request.body)
+
+        newClient= Client()
+        newClient.name = client["name"]
+
+        self.response.write(newClient.name)
+
 
 
 app = webapp2.WSGIApplication([
-    ('/Dessert', Main),
+ ('/Dessert', Main),
+ ('/Client', Client),
 ], debug=True)
