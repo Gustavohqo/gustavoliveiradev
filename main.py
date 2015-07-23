@@ -182,6 +182,7 @@ class Main(webapp2.RequestHandler):
 
         self.response.write(newDessert.name)
 
+class MainClient(webapp2.RequestHandler):
     def post(self):
         logging.debug("LOG: POST-")
         client = json.loads(self.request.body)
@@ -195,5 +196,5 @@ class Main(webapp2.RequestHandler):
 
 app = webapp2.WSGIApplication([
  ('/Dessert', Main),
- ('/Client', Client),
+ ('/Client', MainClient),
 ], debug=True)

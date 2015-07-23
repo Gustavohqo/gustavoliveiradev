@@ -11,7 +11,7 @@ handlers:
 - url: /js
   static_dir: static/js
 
-- url: /
+- url: /client
   static_files: static/indexClient.html
   upload: static/indexClient.html
 
@@ -22,9 +22,6 @@ handlers:
 - url: /(.*\.html)$
   static_files: static/\1
   upload: static/.*\.html$
-
-- url: /Client
-  script: main.app
 
 - url: /.*
   script: main.app
