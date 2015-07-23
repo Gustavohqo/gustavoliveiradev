@@ -144,18 +144,19 @@ import json
 import webapp2
 
 class Ingredient(ndb.Model):
-    amount_per_recipe = ndb.BooleanProperty(indexed=False)
-    total_amount = ndb.BooleanProperty(indexed=False)
+    name = ndb.StringProperty(indexed=False)
+    amount_per_recipe = ndb.FloatProperty(indexed=False)
+    total_amount = ndb.FloatProperty(indexed=False)
     metric = ndb.StringProperty(indexed=False)
-    total_cost = ndb.BooleanProperty(indexed=False)
-    unit_cost = ndb.BooleanProperty(indexed=False)
+    total_cost = ndb.FloatProperty(indexed=False)
+    unit_cost = ndb.FloatProperty(indexed=False)
 
 class Dessert(ndb.Model):
     """Model Sobremesa"""
     name = ndb.StringProperty(indexed=False)
     ingredient = ndb.StructuredProperty(Ingredient, repeated=True)
     numb_of_portions = ndb.IntegerProperty(indexed=False)
-    portion_cost = ndb.BooleanProperty(indexed=False)
+    portion_cost = ndb.FloatProperty(indexed=False)
     cooker_name = ndb.StringProperty(indexed=False)
 
 class Main(webapp2.RequestHandler):

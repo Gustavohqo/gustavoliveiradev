@@ -22,6 +22,9 @@ ul {
     overflow: hidden;
 }
 
+select {
+      -webkit-appearance: menulist;
+}
 
 .nav {
     float: right;

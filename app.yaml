@@ -20,7 +20,7 @@ handlers:
   upload: static/.*\.html$
 
 
-- url: /Dessert
+- url: /.*
   script: main.app
 
 libraries:
