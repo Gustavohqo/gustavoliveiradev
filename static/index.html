@@ -1,8 +1,12 @@
 <!DOCTYPE HTML>
 <html ng-app='app'>
 <head>
+    <!--Bootstrao css-->
+    <link rel="stylesheet" href="stylesheets/bootstrap-3.3.5-dist/css/bootstrap-theme.min.css"/>
+    <!--Font-Awesome css-->
+    <link rel="stylesheet" href="stylesheets/bootstrap-3.3.5-dist/font-awesome-4.3.0/css/font-awesome.min.css"/>
     <link type="text/css" rel="stylesheet" href="stylesheets/main.css" />
-   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
     <!--<script src="js/angular-1.3.0/angular.js"></script>-->
     <script  type="text/javascript" src="js/app.js" ></script>
     <meta charset="UTF-8">
@@ -13,10 +17,10 @@
         <nav>
             <ul>
                 <li class="nav">
-                    Sobremesas
+                    <a href="views/index.html">Sobremesas</a>
                 </li>
                 <li class="nav">
-                    Clientes
+                    <a href="views/indexClient.html"></a>Clientes
                 </li>
                 <li class="nav">
                     Resumo
@@ -25,72 +29,10 @@
         </nav>
     </header>
     <section>
-        <h1> Adicionar Sobremesa</h1>
-        <br/>
-        <div>
-            <form style="overflow: hidden;" novalidate>
-                <div class="newDessert">
-                    <label for="dessertName">Nome:</label>
-                    <input  type="text" id="dessertName" name="dessertName" ng-model="addCtrl.dessert.name" />
-                </div>
+        <h1> Doce Clara</h1>
+        <h2> Bem Vindo </h2>
+        <hr>
 
-                    <div class="newDessert">
-                        <p>Ingredientes: </p>
-                        <section  ng-controller="AddIngredientController as addIngre">
-                           <div ng-show="addCtrl.newIngredientFlag">
-                                <h3>Novo ingrediente</h3>
-                                <div>
-                                    <label for="ingredientName" >Nome: </label>
-                                    <input type="text" id="ingredientName" ng-model="addIngre.ingredient.name"/>
-                                    <label for="ingredientMetric">Unidade de medida: </label>
-                                    <select id="ingredientMetric">
-                                        <option value="">-------</option>
-                                        <option value="Litro">Litro</option>
-                                        <option value="Quilo">Quilo</option>
-                                        <option value="Unidade">Unidade</option>
-                                    </select>
-                                </div>
-                                <div>
-                                    <label for="ingredientAmount">Quantidade: </label>
-                                    <input type="number" id="ingredientAmount" min="0" step="0.1" ng-model="addIngre.ingredient.ingredientAmount"/>
-                                    <label for="ingredientTotalAmount">Quantidade Total: </label>
-                                    <input type="number" id="ingredientTotalAmount" min="0" step="0.1" ng-model="addIngre.ingredient.ingredientTotalAmount"/>
-                                </div>
-                                <div>
-                                    <label for="ingredientCost">Preço Total: </label>
-                                    <input type="number" id="ingredientCost" step="0.1" min="0" ng-model="addIngre.ingredient.ingredientTotalCost"/>
-                                    <button id="addIngredient" ng-click="addCtrl.addIngredient(addIngre.ingredient)"> Adicionar Igrediente</button>
-                                </div>
-                           </div>
-
-                            <div class="ingredientField">
-                                <div class="buttonSeparator"></div>
-                                <button id="ingredients" class="ingredientButton" title="Novo Ingrediente" ng-click="addCtrl.setNewIngrtFlag(); addIngre.clearIngredient()">
-                                    <span ng-if="!addCtrl.newIngredientFlag">+</span>
-                                    <span ng-if="addCtrl.newIngredientFlag">-</span>
-                                </button>
-                            </div>
-                        </section>
-                    </div>
-
-                <div class="newDessert">
-                    <label for="portionAmount">Número de Porções:</label>
-                    <input type="number" id="portionAmount" name="portionAmount" min="0" ng-model="addCtrl.dessert.portionAmount"/>
-                </div>
-                <div class="newDessert">
-                    <p> Preço de custo:</p>
-                    <p id="portionCost" class="portionCost">{{addCtrl.dessert.price}}</p>
-                </div>
-                <div class="newDessert">
-                    <label for="cookerName">Cozinheiro: </label>
-                    <input type="text" id="cookerName" name="cookerName" ng-model="addCtrl.dessert.cookerName"/>
-                </div>
-                <div>
-                    <button id="backToList">Voltar</button>
-                    <button id="addDessert" ng-click="addCtrl.addDessert()">Adicionar</button>
-                </div>
-            </form>
-        </div>
     </section>
 </body>
 </html>

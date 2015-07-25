@@ -12,7 +12,8 @@ app.controller('AddDessertController', function($http,$scope){
 
     this.setNewIngrtFlag = function(){
         if(!this.newIngredientFlag) {
-            this.newIngredientFlag = true ;
+            this.newIngredientFlag = true;
+            document.getElementByClass("ingredientButtonPlus").className +=" ingredientButtonMinor";
         }else{
             this.newIngredientFlag=false;
         }

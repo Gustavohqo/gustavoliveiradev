@@ -145,11 +145,12 @@ import webapp2
 
 class Ingredient(ndb.Model):
     name = ndb.StringProperty(indexed=False)
-    amount_per_recipe = ndb.FloatProperty(indexed=False)
     total_amount = ndb.FloatProperty(indexed=False)
     metric = ndb.StringProperty(indexed=False)
     total_cost = ndb.FloatProperty(indexed=False)
-    unit_cost = ndb.FloatProperty(indexed=False)
+
+
+
 
 class Dessert(ndb.Model):
     """Model Sobremesa"""

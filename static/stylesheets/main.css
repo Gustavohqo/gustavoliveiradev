@@ -26,6 +26,10 @@ select {
       -webkit-appearance: menulist;
 }
 
+.btn {
+    padding: 0;
+}
+
 .nav {
     float: right;
     margin: 5px;
@@ -42,12 +46,12 @@ select {
 }
 
 .buttonSeparator {
-    transform-origin: 0 100%;
+    border-bottom: 2px solid #ccc;
     background-color: #000000;
     float: left;
-    margin: 18px 0 0 5%;
-    width: 80%;
-    height: 2px;
+    margin: 18px 0 0 0;
+    width: 94%;
+    height: 1px;
 }
 
 .ingredientField {
@@ -55,7 +59,7 @@ select {
     overflow: hidden;
 }
 
-.ingredientButton {
+.ingredientButtonPlus,.ingredientButtonMinor  {
     float: left;
     width: 40px;
 	height: 40px;
@@ -65,13 +69,22 @@ select {
 	-moz-border-radius: 20px;
 	-webkit-border-radius: 20px;
 }
-.ingredientButton:hover {
+.ingredientButtonPlus:hover  {
     float: left;
     width: 40px;
 	height: 40px;
     background-color: #28bc66;
     border-color: #000000;
 	-moz-border-radius: 20px;
-	-webkit-border-radius: 20px;
+	-webkit-border-radius: 20px
+}
 
+.ingredientButtonMinor:hover  {
+    float: left;
+    width: 40px;
+	height: 40px;
+    background-color: rgba(254, 0, 8, 0.51);
+    border-color: #000000;
+	-moz-border-radius: 20px;
+	-webkit-border-radius: 20px;
 }

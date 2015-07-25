@@ -1,0 +1,109 @@
+<!DOCTYPE HTML>
+<html ng-app='app'>
+<head>
+    <!--Bootstrao css-->
+    <link rel="stylesheet" href="../stylesheets/bootstrap-3.3.5-dist/css/bootstrap.min.css"/>
+    <!--Font-Awesome css-->
+    <link rel="stylesheet" href="../stylesheets/bootstrap-3.3.5-dist/font-awesome-4.3.0/css/font-awesome.min.css"/>
+    <link type="text/css" rel="stylesheet" href="../stylesheets/main.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+    <!--<script src="js/angular-1.3.0/angular.js"></script>-->
+    <script  type="text/javascript" src="../js/app.js" ></script>
+    <meta charset="UTF-8">
+    <title>DoceClara</title>
+</head>
+<body ng-controller="AddDessertController as addCtrl">
+    <div class="container">
+        <header>
+            <nav>
+                <ul>
+                    <li class="nav">
+                        Sobremesas
+                    </li>
+                    <li class="nav">
+                        Clientes
+                    </li>
+                    <li class="nav">
+                        Resumo
+                    </li>
+                </ul>
+            </nav>
+        </header>
+        <section>
+            <div  class="page-header">
+                <h1> Adicionar Sobremesa</h1>
+            </div>
+            <div class="col-md-8">
+                <form style="overflow: hidden;" novalidate>
+                    <div class="form-group col-md-12">
+                        <label for="dessertName">Nome:</label>
+                        <input  type="text" id="dessertName" name="dessertName" class="form-control" ng-model="addCtrl.dessert.name" />
+                    </div>
+
+                        <div class="col-md-12 form-group">
+                            <label>Ingredientes: </label>
+                            <section  ng-controller="AddIngredientController as addIngre">
+                               <div  ng-show="addCtrl.newIngredientFlag">
+                                    <h3>Novo ingrediente</h3>
+                                    <hr>
+                                    <div class="col-md-8 form-group">
+                                        <div class="col-md-6">
+                                        <label for="ingredientName" >Nome: </label>
+                                        <input type="text" id="ingredientName" class="form-control" ng-model="addIngre.ingredient.name"/>
+                                        </div>
+                                        <div class="col-md-6">
+                                        <label for="ingredientMetric">Unidade de medida: </label>
+                                        <select id="ingredientMetric" class="form-control">
+                                            <option value="">-------</option>
+                                            <option value="Litro">Litro</option>
+                                            <option value="Quilo">Quilo</option>
+                                            <option value="Unidade">Unidade</option>
+                                        </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-8 form-group">
+                                        <label for="ingredientAmount">Quantidade: </label>
+                                        <input type="number" id="ingredientAmount" min="0" step="0.1" class="form-control" ng-model="addIngre.ingredient.ingredientAmount"/>
+                                        <label for="ingredientTotalAmount">Quantidade Total: </label>
+                                        <input type="number" id="ingredientTotalAmount" min="0" step="0.1" class="form-control" ng-model="addIngre.ingredient.ingredientTotalAmount"/>
+                                    </div>
+                                    <div class="col-md-8 form-group">
+                                        <label for="ingredientCost">Preço Total: </label>
+                                        <input type="number" id="ingredientCost" step="0.1" min="0" class="form-control" ng-model="addIngre.ingredient.ingredientTotalCost"/>
+                                        <button id="addIngredient" ng-click="addCtrl.addIngredient(addIngre.ingredient)"> Adicionar Igrediente</button>
+                                    </div>
+                               </div>
+
+                                <div class="col-sm-12 ingredientField">
+                                    <div class="buttonSeparator"></div>
+                                    <button id="ingredients" class="ingredientButtonPlus btn" title="Novo Ingrediente" ng-click="addCtrl.setNewIngrtFlag(); addIngre.clearIngredient()">
+                                        <span ng-if="!addCtrl.newIngredientFlag" class="fa fa-plus fa-2x icon"></span>
+                                        <span ng-if="addCtrl.newIngredientFlag" class="fa fa-minus fa-2x icon"></span>
+                                    </button>
+                                </div>
+                            </section>
+                        </div>
+
+                    <div class="col-md-6 form-group">
+                        <label for="portionAmount">Número de Porções:</label>
+                        <input type="number" id="portionAmount" name="portionAmount" min="0" class="form-control" ng-model="addCtrl.dessert.portionAmount"/>
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <label class="control-label"> Preço de custo:</label>
+                        <p id="portionCost" class="form-control-static">{{addCtrl.dessert.price}}</p>
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <label for="cookerName">Cozinheiro: </label>
+                        <input type="text" id="cookerName" name="cookerName" class="form-control" ng-model="addCtrl.dessert.cookerName"/>
+                    </div>
+                    <div class="col-md-8">
+                        <a href="/"><button id="backToList" class="btn btn-default" >Voltar</button></a>
+                        <button id="addDessert" class="btn btn-default" ng-click="addCtrl.addDessert()">Adicionar</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </div>
+</body>
+</html>
