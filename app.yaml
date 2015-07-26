@@ -11,13 +11,16 @@ handlers:
 - url: /js
   static_dir: static/js
 
+- url: /img
+  static_dir: static/images
+
 - url: /client
   static_files: static/views/indexClient.html
   upload: static/views/indexClient.html
 
 - url: /
-  static_files: static/indexDessert.html
-  upload: static/indexDessert.html
+  static_files: static/index.html
+  upload: static/index.html
 
 - url: /(.*\.html)$
   static_files: static/\1

@@ -21,10 +21,13 @@ select {
       -webkit-appearance: menulist;
 }
 
-.btn {
-    padding: 0;
+i.fa {
+    margin-right: 6px;
 }
 
+.page-header {
+    border-color: #716666;
+}
 
 .titulo{
     text-align: center;
@@ -34,6 +37,9 @@ select {
 .newdessert {
     margin-top: 0px;
     float: left;
+}
+.btn-add-ing {
+    margin-top: 20px;
 }
 
 .buttonSeparator {
@@ -78,6 +84,13 @@ select {
     border-color: #000000;
 	-moz-border-radius: 20px;
 	-webkit-border-radius: 20px;
+}
+
+.showback {
+    background: #ffffff;
+    padding: 15px;
+    margin-bottom: 15px;
+    box-shadow: 0px 3px 2px #aab2bd;
 }
 
 .button {
@@ -137,7 +150,7 @@ select {
   background-color: #716666;
 }
 .nav a.active {
-  background-color: #fff;
+  background-color: #ffffff;
   color: #65d6ac;
   cursor: default;
 }

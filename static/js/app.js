@@ -31,43 +31,55 @@ app.controller('AddDessertController', function($http,$scope){
     };
 
     this.addIngredient = function(newIngredient){
-        console.log(newIngredient.name);
+        console.log(newIngredient.ingredient.name);
         this.dessert.ingredientes.push(newIngredient);
-        console.log(this.dessert.ingredientes[0].name);
+        console.log(this.dessert.ingredientes[0].ingredient.name);
     };
 });
 
 
 app.controller('AddIngredientController',function($scope,$http){
-    this.ingredient = {};
+    this.ingredientAdded= {};
     this.addIngredientFlag = false;
     this.ingredientList = [];
+    this.myIngdnt = null;
+    this.ingredientAmount = null;
 
     $http.get('/Ingredient').success(function(data){
         $scope.ingredientList = data;
         if($scope.ingredientList.length === 0) {
             console.log('data = 0');
-            $scope.ingredientList = ['Feijao', 'Farinha', 'Arroz'];
+            $scope.ingredientList = [{name:'Teste1', cost:2.00}, {name:'Teste2',cost:1.70}, {name:'Teste3', cost: 1.95}];
         }
     });
+
+    this.addToDessert = function(){
+        if( this.ingredientAmount !== null) {
+            this.ingredientAdded.ingredient = this.myIngdnt;
+            this.ingredientAdded.ingredientAmount = this.ingredientAmount;
+            return this.ingredientAdded;
+        }
+    };
 
     this.selectIngredient = function(){
         if(this.myIngdnt === null) {
             this.addIngredientFlag = false;
+            this.clearIngredient();
         }else{
             this.addIngredientFlag=true;
         }
         console.log('flag: ', this.addIngredientFlag)
-    }
-
-    this.myIngdnt = null;
+    };
 
     this.editIngredient = function(edited){
         //TODO
     };
 
     this.clearIngredient = function(){
-        this.ingredient = {};
+        this.addIngredientFlag = false;
+        this.myIngdnt = null;
+        this.ingredientAmount = null;
+        this.ingredientAdded = {};
         console.log('clean');
     };
 });
