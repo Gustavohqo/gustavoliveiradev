@@ -1,6 +1,8 @@
 <!DOCTYPE HTML>
 <html ng-app='app'>
 <head>
+    <!--Image Tittle-->
+    <link rel="shortcut icon" type="image/jpg" href="images/image.jpg">
     <!--Bootstrao css-->
     <link rel="stylesheet" href="../stylesheets/bootstrap-3.3.5-dist/css/bootstrap.min.css"/>
     <!--Font-Awesome css-->
@@ -15,21 +17,17 @@
 </head>
 <body ng-controller="AddDessertController as addCtrl">
     <div class="container">
-        <header>
-            <nav>
+          <header>
+        <div >
+            <nav class="nav">
                 <ul>
-                    <li class="nav">
-                        Sobremesas
-                    </li>
-                    <li class="nav">
-                        Clientes
-                    </li>
-                    <li class="nav">
-                        Resumo
-                    </li>
+                    <li><a href="views/index.html">Início</a></li>
+                    <li><a href="views/indexClient.html">Clientes</a></li>
+                    <li><a href="">Resumo</a></li>
                 </ul>
-            </nav>
-        </header>
+             </nav>
+        </div>
+    </header>
         <section>
             <div  class="page-header">
                 <h1> Adicionar Sobremesa</h1>
@@ -44,6 +42,36 @@
                         <div class="col-md-12 form-group">
                             <label for="ingredientsList">Ingredientes: </label>
                             <section  ng-controller="AddIngredientController as addIngre">
+                               <div  ng-show="addCtrl.newIngredientFlag">
+                                    <h3>Novo ingrediente</h3>
+                                    <hr>
+                                    <div class="col-md-8 form-group">
+                                        <div class="col-md-6">
+                                        <label for="ingredientName" >Nome: </label>
+                                        <input type="text" id="ingredientName" class="form-control" ng-model="addIngre.ingredient.name"/>
+                                        </div>
+                                        <div class="col-md-6">
+                                        <label for="ingredientMetric">Unidade de medida: </label>
+                                        <select id="ingredientMetric" class="form-control">
+                                            <option value="">-------</option>
+                                            <option value="Litro">Litro</option>
+                                            <option value="Quilo">Quilo</option>
+                                            <option value="Unidade">Unidade</option>
+                                        </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-8 form-group">
+                                        <label for="ingredientAmount">Quantidade: </label>
+                                        <input type="number" id="ingredientAmount" min="0" step="0.1" class="form-control" ng-model="addIngre.ingredient.ingredientAmount"/>
+                                        <label for="ingredientTotalAmount">Quantidade Total: </label>
+                                        <input type="number" id="ingredientTotalAmount" min="0" step="0.1" class="form-control" ng-model="addIngre.ingredient.ingredientTotalAmount"/>
+                                    </div>
+                                    <div class="col-md-8 form-group">
+                                        <label for="ingredientCost">Preço Total: </label>
+                                        <input type="number" id="ingredientCost" step="0.1" min="0" class="form-control" ng-model="addIngre.ingredient.ingredientTotalCost"/>
+                                        <button id="addIngredient" class=button ng-click="addCtrl.addIngredient(addIngre.ingredient)"> Adicionar Igrediente</button>
+                                    </div>
+                               </div>
 
                                 <select class="form-control" id="ingredientsList" ng-model="addIngre.myIngdnt"
                                         ng-options="ingdnt for ingdnt in ingredientList"
@@ -67,8 +95,8 @@
                         <input type="text" id="cookerName" name="cookerName" class="form-control" ng-model="addCtrl.dessert.cookerName"/>
                     </div>
                     <div class="col-md-8">
-                        <a href="/"><button id="backToList" class="btn btn-default" >Voltar</button></a>
-                        <button id="addDessert" class="btn btn-default" ng-click="addCtrl.addDessert()">Adicionar</button>
+                        <a href="/"><button id="backToList" class=button >Voltar</button></a>
+                        <button id="addDessert" class=button ng-click="addCtrl.addDessert()">Adicionar</button>
                     </div>
                 </form>
             </div>
