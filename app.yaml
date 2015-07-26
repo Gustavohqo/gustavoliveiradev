@@ -12,8 +12,8 @@ handlers:
   static_dir: static/js
 
 - url: /client
-  static_files: static/indexClient.html
-  upload: static/indexClient.html
+  static_files: static/views/indexClient.html
+  upload: static/views/indexClient.html
 
 - url: /
   static_files: static/index.html

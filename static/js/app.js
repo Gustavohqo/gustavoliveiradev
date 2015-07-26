@@ -38,8 +38,30 @@ app.controller('AddDessertController', function($http,$scope){
 });
 
 
-app.controller('AddIngredientController',function(){
+app.controller('AddIngredientController',function($scope,$http){
     this.ingredient = {};
+    this.addIngredientFlag = false;
+    this.ingredientList = [];
+
+    $http.get('/Ingredient').success(function(data){
+        $scope.ingredientList = data;
+        if($scope.ingredientList.length === 0) {
+            console.log('data = 0');
+            $scope.ingredientList = ['Feijao', 'Farinha', 'Arroz'];
+        }
+    });
+
+    this.selectIngredient = function(){
+        if(this.myIngdnt === null) {
+            this.addIngredientFlag = false;
+        }else{
+            this.addIngredientFlag=true;
+        }
+        console.log('flag: ', this.addIngredientFlag)
+    }
+
+    this.myIngdnt = null;
+
     this.editIngredient = function(edited){
         //TODO
     };

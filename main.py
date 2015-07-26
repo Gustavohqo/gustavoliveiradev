@@ -193,9 +193,20 @@ class MainClient(webapp2.RequestHandler):
 
         self.response.write(newClient.name)
 
+class IngredientService(webapp2.RequestHandler):
+    def get(self):
+        self.response.write(Ingredient.query().fetch(20))
+    def post(self):
+        newIngredient = json.loads(self.request.body)
+
+        ingredient = Ingredient()
+        ingredient.populate(newIngredient.name,newIngredient.total_amount,newIngredient.metric,newIngredient.total_cost)
+        ingredient.put()
+
 
 
 app = webapp2.WSGIApplication([
  ('/Dessert', Main),
  ('/Client', MainClient),
+ ('/Ingredient', IngredientService),
 ], debug=True)

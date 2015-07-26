@@ -42,46 +42,15 @@
                     </div>
 
                         <div class="col-md-12 form-group">
-                            <label>Ingredientes: </label>
+                            <label for="ingredientsList">Ingredientes: </label>
                             <section  ng-controller="AddIngredientController as addIngre">
-                               <div  ng-show="addCtrl.newIngredientFlag">
-                                    <h3>Novo ingrediente</h3>
-                                    <hr>
-                                    <div class="col-md-8 form-group">
-                                        <div class="col-md-6">
-                                        <label for="ingredientName" >Nome: </label>
-                                        <input type="text" id="ingredientName" class="form-control" ng-model="addIngre.ingredient.name"/>
-                                        </div>
-                                        <div class="col-md-6">
-                                        <label for="ingredientMetric">Unidade de medida: </label>
-                                        <select id="ingredientMetric" class="form-control">
-                                            <option value="">-------</option>
-                                            <option value="Litro">Litro</option>
-                                            <option value="Quilo">Quilo</option>
-                                            <option value="Unidade">Unidade</option>
-                                        </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-8 form-group">
-                                        <label for="ingredientAmount">Quantidade: </label>
-                                        <input type="number" id="ingredientAmount" min="0" step="0.1" class="form-control" ng-model="addIngre.ingredient.ingredientAmount"/>
-                                        <label for="ingredientTotalAmount">Quantidade Total: </label>
-                                        <input type="number" id="ingredientTotalAmount" min="0" step="0.1" class="form-control" ng-model="addIngre.ingredient.ingredientTotalAmount"/>
-                                    </div>
-                                    <div class="col-md-8 form-group">
-                                        <label for="ingredientCost">Preço Total: </label>
-                                        <input type="number" id="ingredientCost" step="0.1" min="0" class="form-control" ng-model="addIngre.ingredient.ingredientTotalCost"/>
-                                        <button id="addIngredient" ng-click="addCtrl.addIngredient(addIngre.ingredient)"> Adicionar Igrediente</button>
-                                    </div>
-                               </div>
 
-                                <div class="col-sm-12 ingredientField">
-                                    <div class="buttonSeparator"></div>
-                                    <button id="ingredients" class="ingredientButtonPlus btn" title="Novo Ingrediente" ng-click="addCtrl.setNewIngrtFlag(); addIngre.clearIngredient()">
-                                        <span ng-if="!addCtrl.newIngredientFlag" class="fa fa-plus fa-2x icon"></span>
-                                        <span ng-if="addCtrl.newIngredientFlag" class="fa fa-minus fa-2x icon"></span>
-                                    </button>
-                                </div>
+                                <select class="form-control" id="ingredientsList" ng-model="addIngre.myIngdnt"
+                                        ng-options="ingdnt for ingdnt in ingredientList"
+                                        ng-change="addIngre.selectIngredient()">
+                                    <option value="">-- Escolha um Ingrediente --</option>
+                                </select>
+                                <!--<div ng-include="'dessertView/includes/newIngredient.html'"></div>-->
                             </section>
                         </div>
 
