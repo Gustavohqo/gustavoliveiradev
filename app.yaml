@@ -16,8 +16,8 @@ handlers:
   upload: static/indexClient.html
 
 - url: /
-  static_files: static/index.html
-  upload: static/index.html
+  static_files: static/indexDessert.html
+  upload: static/indexDessert.html
 
 - url: /(.*\.html)$
   static_files: static/\1

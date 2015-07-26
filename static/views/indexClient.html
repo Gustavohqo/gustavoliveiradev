@@ -1,57 +1,81 @@
 <!DOCTYPE HTML>
 <html ng-app='app'>
 <head>
-    <link type="text/css" rel="stylesheet" href="stylesheets/main.css" />
-   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+    <!--Image Tittle-->
+    <link rel="shortcut icon" type="image/jpg" href="images/image.jpg">
+    <!--Bootstrao css-->
+    <link rel="stylesheet" href="../stylesheets/bootstrap-3.3.5-dist/css/bootstrap.min.css"/>
+    <!--Font-Awesome css-->
+    <link rel="stylesheet" href="../stylesheets/bootstrap-3.3.5-dist/font-awesome-4.3.0/css/font-awesome.min.css"/>
+    <link type="text/css" rel="stylesheet" href="../stylesheets/main.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
     <!--<script src="js/angular-1.3.0/angular.js"></script>-->
-    <script  type="text/javascript" src="js/appCliente.js" ></script>
+      <script  type="text/javascript" src="../js/appClient.js" ></script>
+
     <meta charset="UTF-8">
     <title>DoceClara</title>
 </head>
 <body ng-controller="AddClientController as addCtrl">
-
+ <div class="container">
+         <header>
+        <div >
+            <nav class="nav">
+                <ul>
+                    <li><a href="views/index.html">Início</a></li>
+                    <li><a href="views/indexDessert.html">Sobremesas</a></li>
+                    <li><a href="">Resumo</a></li>
+                </ul>
+             </nav>
+        </div>
+    </header>
     <section>
-        <h1> Adicionar Cliente</h1>
+       <div  class="page-header">
+                <h1> Adicionar Cliente</h1>
+            </div>
         <br/>
-        <div>
+        <div class="col-md-8">
+
             <form style="overflow: hidden;" novalidate>
-                <div class="newClient">
+                <div class="form-group col-md-12">
                     <label for="clientName">Nome:</label>
-                    <input  type="text" id="clientName" name="clientName" ng-model="addCtrl.client.name" />
+                    <input  type="text" id="clientName" name="clientName" class="form-control" ng-model="addCtrl.client.name" />
                 </div>
                  <br/>
-                 <div class="newClient">
+                 <div class="col-md-12 form-group">
                     <label for="telephone">Telefone: </label>
-                    <input type="text" id="telephone" name="telephone" ng-model="addCtrl.client.telephone"/>
+                    <input type="text" id="telephone" name="telephone" class="form-control" ng-model="addCtrl.client.telephone"/>
                 </div>
                 <br/>
-                 <div class="newClient">
-                    <p for="request">Pedido:
-                    <select>
+                  <div class="col-md-12 form-group">
+                    <label for="requestAmount">Pedido: </label>
+                    <select class="form-control">
                          <!--depois aqui tem o código que puxa da lista de sobremesas-->
-                        <option>1.Sobremesa1</option>
-                        <option>2.Sobremesa2</option>
-                        <option>3.Sobremesa3</option>
-                    </select></p>
+                        <option value="">-------</option>
+                        <option value="1.Sobremesa1">1.Sobremesa1</option>
+                        <option value="2.Sobremesa2">2.Sobremesa2</option>
+                        <option value="3.Sobremesa3">3.Sobremesa3</option>
+                    </select>
                 </div>
                 <br/>
-                <div class="newClient">
+                <div class="col-md-12 form-group">
                     <label for="requestAmount">Quantidade do Pedido:</label>
-                    <input type="number" id="requestAmount" name="requestAmount" min="0" ng-model="addCtrl.client.requestAmount"/>
+                    <input type="number" id="requestAmount" name="requestAmount" min="0" class="form-control" ng-model="addCtrl.client.requestAmount"/>
                 </div>
                 <br/>
-                <div class="newClient">
-                    <p> Preço de venda:</p>
+                <div class="col-md-12 form-group">
+                    <label> Preço de venda:</label>
                     <p id="dessertCost" class="dessertCost"></p>
                 </div>
                 <br/>
                  <div>
-                    <button id="backToList">Voltar</button>
-                    <button id="addDessert" ng-click="addCtrl.addDessert()">Adicionar</button>
+                    <button class=button id="backToList">Voltar</button>
+                    <button class=button id="addDessert" ng-click="addCtrl.addDessert()">Adicionar</button>
                 </div>
 
             </form>
         </div>
     </section>
+     </div>
 </body>
 </html>

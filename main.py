@@ -164,7 +164,7 @@ class Client(ndb.Model):
     """Model Cliente"""
     name = ndb.StringProperty(indexed=False)
     telephone = ndb.StringProperty(indexed=False)
-    request = ndb.StringProperty(indexed=False)
+    request_dest = ndb.StringProperty(indexed=False)
     request_quant = ndb.IntegerProperty(indexed=False)
     dessert_cost = ndb.BooleanProperty(indexed=False)
 
