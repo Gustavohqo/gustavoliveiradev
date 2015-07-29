@@ -4,12 +4,8 @@
 body {
     font-family: 'Oswald', sans-serif;
     background-color: #F5ECCE;
-    width: 80%;
-    height: 900px;
-    margin: auto;
-    padding: 10px;
-    border-left: dashed #d4d4d4 1px;
-    border-right: dashed #d4d4d4 1px;
+    margin: 0 !important;
+    padding: 0 !important;
 }
 
 ul {
@@ -25,6 +21,20 @@ i.fa {
     margin-right: 6px;
 }
 
+.centered {
+    text-align: center;
+}
+
+.div-centered > .btn-danger {
+    margin-left: 20%;
+    margin-right: 5px;
+}
+
+.div-centered > .btn-primary {
+    margin-left: 5px;
+    margin-right: 35%;
+}
+
 .page-header {
     border-color: #716666;
 }
@@ -38,52 +48,9 @@ i.fa {
     margin-top: 0px;
     float: left;
 }
-.btn-add-ing {
-    margin-top: 20px;
-}
 
-.buttonSeparator {
-    border-bottom: 2px solid #ccc;
-    background-color: #716666;
-    float: left;
-    margin: 18px 0 0 0;
-    width: 94%;
-    height: 1px;
-}
-
-.ingredientField {
-    height: 45px;
-    overflow: hidden;
-}
-
-.ingredientButtonPlus,.ingredientButtonMinor  {
-    float: left;
-    width: 40px;
-	height: 40px;
-    background-color: #3ca8b0;
-    border-color: #000000;
-    border-style: dotted;
-	-moz-border-radius: 20px;
-	-webkit-border-radius: 20px;
-}
-.ingredientButtonPlus:hover  {
-    float: left;
-    width: 40px;
-	height: 40px;
-    background-color: #716666;
-    border-color: #000000;
-	-moz-border-radius: 20px;
-	-webkit-border-radius: 20px
-}
-
-.ingredientButtonMinor:hover  {
-    float: left;
-    width: 40px;
-	height: 40px;
-    background-color: #716666;
-    border-color: #000000;
-	-moz-border-radius: 20px;
-	-webkit-border-radius: 20px;
+.form-group {
+    margin-top: 10px;
 }
 
 .showback {
@@ -92,39 +59,44 @@ i.fa {
     margin-bottom: 15px;
     box-shadow: 0px 3px 2px #aab2bd;
 }
+aside{
+}
 
-.button {
-   border-top: 1px solid #82e9ed;
-   background: #3ca8b0;
-   background: -webkit-gradient(linear, left top, left bottom, from(#3e9296), to(#3ca8b0));
-   background: -webkit-linear-gradient(top, #3e9296, #3ca8b0);
-   background: -moz-linear-gradient(top, #3e9296, #3ca8b0);
-   background: -ms-linear-gradient(top, #3e9296, #3ca8b0);
-   background: -o-linear-gradient(top, #3e9296, #3ca8b0);
-   padding: 5px 10px;
-   -webkit-border-radius: 8px;
-   -moz-border-radius: 8px;
-   border-radius: 8px;
-   -webkit-box-shadow: rgba(0,0,0,1) 0 1px 0;
-   -moz-box-shadow: rgba(0,0,0,1) 0 1px 0;
-   box-shadow: rgba(0,0,0,1) 0 1px 0;
-   text-shadow: rgba(0,0,0,.4) 0 1px 0;
-   color: white;
-   font-size: 14px;
-   font-family: Georgia, serif;
-   text-decoration: none;
-   vertical-align: middle;
-   }
-.button:hover {
-   border-top-color: #286578;
-   background: #286578;
-   color: #ccc;
-   }
-.button:active {
-   border-top-color: #1b5863;
-   background: #1b5863;
-   }
+.nav {
+    position: fixed;
+    left: 0;
+    right: 0;
+    z-index: 1002;
 
+    min-height: 60px;
+    padding: 0 15px;
+}
+
+#container {
+    width: 100%;
+    height: 100%;
+}
+
+#main-content {
+    margin-left: 210px;
+}
+
+#sidebar {
+    width: 210px;
+    height: 100%;
+    position: fixed;
+    background: #716666;
+}
+
+.wrapper {
+    display: inline-block;
+    margin-top: 60px;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-bottom: 15px;
+    padding-top: 0px;
+    width: 100%;
+}
 
 .nav ul {
   list-style: none;
@@ -135,31 +107,39 @@ i.fa {
 }
 .nav li {
   font-family: 'Oswald', sans-serif;
-  font-size: 1.2em;
-  line-height: 40px;
-  height: 40px;
+  font-size: 2em;
+  line-height: 60px;
+  height: 60px;
   border-bottom: 1px solid #888;
 }
 .nav a {
-  text-decoration: none;
-  color: #fff;
-  display: block;
-  transition: .3s background-color;
+    text-decoration: none;
+    color: #fff;
+    display: inherit;
+    transition: .3s background-color;
+    height: 50px
 }
 .nav a:hover {
-  background-color: #716666;
+    background-color: #716666;
+    border-bottom: 10px solid;
+    border-bottom-color: rgba(53, 42, 42, 0.89);
 }
 .nav a.active {
   background-color: #ffffff;
   color: #65d6ac;
   cursor: default;
 }
+
 @media screen and (min-width: 600px) {
+    .nav a {
+        height: 60px;
+        padding-top: 10px;
+    }
     .nav li {
         width: 150px;
         border-bottom: none;
-        height: 50px;
-        line-height: 50px;
+        height: 60px;
+        line-height: 40px;
         font-size: 1.4em;
     }
 
@@ -177,3 +157,9 @@ i.fa {
         background-color: #3ca8b0;
     }
 }
+
+.btn{
+ float: right;
+}
+
+/*          INGREDIENT VIEW             */

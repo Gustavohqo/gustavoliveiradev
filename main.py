@@ -195,12 +195,15 @@ class MainClient(webapp2.RequestHandler):
 
 class IngredientService(webapp2.RequestHandler):
     def get(self):
-        self.response.write(Ingredient.query().fetch(20))
+        self.response.write(Ingredient.query().get())
     def post(self):
         newIngredient = json.loads(self.request.body)
-
+        self.response.write(newIngredient["name"])
         ingredient = Ingredient()
-        ingredient.populate(newIngredient.name,newIngredient.total_amount,newIngredient.metric,newIngredient.total_cost)
+        ingredient.name = newIngredient["name"]
+	ingredient.total_amount = newIngredient["total_amount"]
+	ingredient.metric = newIngredient["metric"]
+	ingredient.total_cost = newIngredient["total_cost"]
         ingredient.put()
 
 

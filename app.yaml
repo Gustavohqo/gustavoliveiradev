@@ -18,6 +18,10 @@ handlers:
   static_files: static/views/indexClient.html
   upload: static/views/indexClient.html
 
+- url: /ingredient
+  static_files: static/views/ingredientView/mainIngredient.html
+  upload: static/views/ingredientView/mainIngredient.html
+
 - url: /
   static_files: static/index.html
   upload: static/index.html
