@@ -145,11 +145,12 @@ import webapp2
 
 class Ingredient(ndb.Model):
     name = ndb.StringProperty(indexed=False)
-    amount_per_recipe = ndb.FloatProperty(indexed=False)
     total_amount = ndb.FloatProperty(indexed=False)
     metric = ndb.StringProperty(indexed=False)
     total_cost = ndb.FloatProperty(indexed=False)
-    unit_cost = ndb.FloatProperty(indexed=False)
+
+
+
 
 class Dessert(ndb.Model):
     """Model Sobremesa"""
@@ -163,7 +164,7 @@ class Client(ndb.Model):
     """Model Cliente"""
     name = ndb.StringProperty(indexed=False)
     telephone = ndb.StringProperty(indexed=False)
-    request = ndb.StringProperty(indexed=False)
+    request_dest = ndb.StringProperty(indexed=False)
     request_quant = ndb.IntegerProperty(indexed=False)
     dessert_cost = ndb.BooleanProperty(indexed=False)
 
@@ -192,9 +193,23 @@ class MainClient(webapp2.RequestHandler):
 
         self.response.write(newClient.name)
 
+class IngredientService(webapp2.RequestHandler):
+    def get(self):
+        self.response.write(Ingredient.query().get())
+    def post(self):
+        newIngredient = json.loads(self.request.body)
+        self.response.write(newIngredient["name"])
+        ingredient = Ingredient()
+        ingredient.name = newIngredient["name"]
+	ingredient.total_amount = newIngredient["total_amount"]
+	ingredient.metric = newIngredient["metric"]
+	ingredient.total_cost = newIngredient["total_cost"]
+        ingredient.put()
+
 
 
 app = webapp2.WSGIApplication([
  ('/Dessert', Main),
  ('/Client', MainClient),
+ ('/Ingredient', IngredientService),
 ], debug=True)
