@@ -39,17 +39,18 @@ app.controller('AddDessertController', function($http,$scope){
 
 
 app.controller('AddToDessertController',function($scope,$http){
+    var self = this;
+
     this.ingredientAdded= {};
     this.addIngredientFlag = false;
     this.ingredientList = [];
     this.myIngdnt = null;
     this.ingredientAmount = null;
 
-    $http.get('/Ingredient').success(function(data){
-        $scope.ingredientList = data;
-        if($scope.ingredientList.length === 0) {
-            console.log('data = 0');
-            $scope.ingredientList = [{name:'Teste1', cost:2.00}, {name:'Teste2',cost:1.70}, {name:'Teste3', cost: 1.95}];
+    $http.get('/IngredientView').success(function(data){
+        for(var i = 0; i < data.length; i ++) {
+            self.ingredientList.push(data[i]);
+            console.log(data[i]);
         }
     });
 
@@ -88,16 +89,19 @@ app.controller('AddToDessertController',function($scope,$http){
 });
 
 app.controller('AddDessertController',function($scope,$http,$q){
-    this.metricList = ['Litro', 'Quilo', 'Unidade']
+    this.metricList = ['Litro', 'Quilo', 'Unidade'];
     this.ingredient = {};
 
     var self = this;
     this.ingredientList = [];
 
 
-    $http.get('/Ingredient').success(function(data){
-        self.ingredientList.push(data);
-	console.log(data);
+    $http.get('/IngredientView').success(function(data){
+        for(var i = 0; i < data.length; i ++) {
+            self.ingredientList.push(data[i]);
+            console.log(data[i]);
+        }
+
         //if(self.ingredientList.length === 0) {
           //  console.log('data = 0');
            // self.ingredientList = [{name:'Teste1', cost:2.00}, {name:'Teste2',cost:1.70}, {name:'Teste3', cost: 1.95}];
@@ -111,7 +115,7 @@ app.controller('AddDessertController',function($scope,$http,$q){
         console.log(this.ingredient.metric);
         console.log(this.ingredient.total_cost);
         console.log(this.ingredient.total_amount);
-        $http.post('/Ingredient',this.ingredient).success(function(data){
+        $http.post('/IngredientView',this.ingredient).success(function(data){
              console.log(data);
         });
    };
