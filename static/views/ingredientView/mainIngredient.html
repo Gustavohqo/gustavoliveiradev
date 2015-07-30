@@ -17,17 +17,25 @@
 </head>
 <body>
     <div id="container">
+        <!--
+        TOP Nav-bar
+        -->
         <header>
             <div >
                 <nav class="nav">
                     <ul>
                         <li><a href="/">Início</a></li>
-                        <li><a href="views/indexClient.html">Clientes</a></li>
+                        <li><a href="/indexClient.html">Clientes</a></li>
+                        <li><a href="/dessert">Sobremesas</a></li>
+                        <li><a href="/ingredient">Ingredientes</a></li>
                         <li><a href="">Resumo</a></li>
                     </ul>
                  </nav>
             </div>
         </header>
+        <!--
+        TODO Nav bar
+        -->
         <aside>
             <div id="sidebar" class="nav-collapse" style="overflow: hidden; outline: none;"></div>
         </aside>
@@ -47,8 +55,8 @@
                         </tr>
                         <tr ng-hide="addCtrl.ingredientList.length === 0" ng-repeat="ing in addCtrl.ingredientList">
                             <td class="centered">{{ing.name}}</td>
-                            <td class="centered">{{ing.cost}}</td>
-                            <td class="centered">{{ing.ingredientAmount}}</td>
+                            <td class="centered">{{ing.total_cost}}</td>
+                            <td class="centered">{{ing.total_amount}}</td>
                             <td>
                                 <div class="div-centered"><button class="btn btn-primary btn-xs" title="Editar"><span class="fa fa-edit"></span></button></div>
                                 <div class="div-centered"><button class="btn btn-danger btn-xs" title="Excluir"><span class="fa fa-trash-o"></span></button></div>

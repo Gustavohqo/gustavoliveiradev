@@ -132,6 +132,7 @@
 #     ('/sign', Guestbook),
 # ], debug=True)
 import logging
+from google.appengine.ext.db import to_dict
 
 __author__ = 'Gustavo'
 import cgi
@@ -195,15 +196,15 @@ class MainClient(webapp2.RequestHandler):
 
 class IngredientService(webapp2.RequestHandler):
     def get(self):
-        self.response.write(Ingredient.query().get())
+        ingredientList = json.dumps([ing.to_dict() for ing in Ingredient.query().fetch()])
+        self.response.write(ingredientList)
     def post(self):
         newIngredient = json.loads(self.request.body)
-        self.response.write(newIngredient["name"])
         ingredient = Ingredient()
         ingredient.name = newIngredient["name"]
-	ingredient.total_amount = newIngredient["total_amount"]
-	ingredient.metric = newIngredient["metric"]
-	ingredient.total_cost = newIngredient["total_cost"]
+        ingredient.total_amount = newIngredient["total_amount"]
+        ingredient.metric = newIngredient["metric"]
+        ingredient.total_cost = newIngredient["total_cost"]
         ingredient.put()
 
 
@@ -211,5 +212,5 @@ class IngredientService(webapp2.RequestHandler):
 app = webapp2.WSGIApplication([
  ('/Dessert', Main),
  ('/Client', MainClient),
- ('/Ingredient', IngredientService),
+ ('/IngredientView', IngredientService),
 ], debug=True)
