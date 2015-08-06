@@ -89,9 +89,9 @@ app.controller('AddToDessertController',function($scope,$http){
 });
 
 app.controller('AddDessertController',function($scope,$http,$q){
-    this.metricList = ['Litro', 'Quilo', 'Unidade'];
+    this.metricList = [{representation:'L', name:'Litro'}, {representation:'Kg', name:'Quilo'}, {representation:'Un', name:'Unidade'}];
     this.ingredient = {};
-
+    $scope.metric = {};
     var self = this;
     this.ingredientList = [];
 
@@ -111,13 +111,14 @@ app.controller('AddDessertController',function($scope,$http,$q){
     });
 
    this.addIngredient = function(){
-        console.log(this.ingredient.name);
-        console.log(this.ingredient.metric);
-        console.log(this.ingredient.total_cost);
-        console.log(this.ingredient.total_amount);
-        $http.post('/IngredientView',this.ingredient).success(function(data){
-             console.log(data);
-        });
+       this.ingredient.metric = $scope.metric.name;
+       console.log(this.ingredient.name);
+       console.log(this.ingredient.metric);
+       console.log(this.ingredient.total_cost);
+       console.log(this.ingredient.total_amount);
+       $http.post('/IngredientView',this.ingredient).success(function(data){
+            console.log(data);
+       });
    };
 
 

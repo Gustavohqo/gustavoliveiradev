@@ -163,3 +163,6 @@ aside{
 }
 
 /*          INGREDIENT VIEW             */
+.metric {
+    width: 45px;
+}
