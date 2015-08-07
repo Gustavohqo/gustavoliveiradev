@@ -162,4 +162,13 @@ aside{
  float: right;
 }
 
+.ng-invalid {
+    border-color: red;
+}
+
+/*          DESSERT VIEW                */
+.addToDessertBtn {
+    margin-top: 24.5px;
+}
+
 /*          INGREDIENT VIEW             */

@@ -1,4 +1,4 @@
-<div  ng-show="addCtrl.newIngredientFlag">
+<div  ng-show="addDessCtrl.newIngredientFlag">
     <h3>Novo ingrediente</h3>
     <hr>
     <div class="col-md-8 form-group">
@@ -23,14 +23,14 @@
     <div class="col-md-6 form-group">
         <label for="ingredientCost">Preço Total: </label>
         <input type="number" id="ingredientCost" step="0.1" min="0" class="form-control" ng-model="addIngre.ingredient.ingredientTotalCost"/>
-        <button id="addIngredient" ng-click="addCtrl.addIngredient(addIngre.ingredient)"> Adicionar Igrediente</button>
+        <button id="addIngredient" ng-click="addDessCtrl.addIngredient(addIngre.ingredient)"> Adicionar Igrediente</button>
     </div>
 </div>
 
 <div class="col-sm-12 ingredientField">
     <div class="buttonSeparator"></div>
-    <button id="ingredients" class="ingredientButtonPlus btn" title="Novo Ingrediente" ng-click="addCtrl.setNewIngrtFlag(); addIngre.clearIngredient()">
-        <span ng-if="!addCtrl.newIngredientFlag" class="fa fa-plus fa-2x icon"></span>
-        <span ng-if="addCtrl.newIngredientFlag" class="fa fa-minus fa-2x icon"></span>
+    <button id="ingredients" class="ingredientButtonPlus btn" title="Novo Ingrediente" ng-click="addDessCtrl.setNewIngrtFlag(); addIngre.clearIngredient()">
+        <span ng-if="!addDessCtrl.newIngredientFlag" class="fa fa-plus fa-2x icon"></span>
+        <span ng-if="addDessCtrl.newIngredientFlag" class="fa fa-minus fa-2x icon"></span>
     </button>
 </div>

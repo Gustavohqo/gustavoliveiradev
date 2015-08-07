@@ -39,7 +39,7 @@
         <aside>
             <div id="sidebar" class="nav-collapse" style="overflow: hidden; outline: none;"></div>
         </aside>
-        <div id="main-content" ng-controller="AddDessertController as addCtrl">
+        <div id="main-content" ng-controller="AddIngredientController as addDessCtrl">
             <div class="wrapper">
                 <div class="page-header">
                     <h3>Novo Ingrediente</h3>
@@ -53,7 +53,7 @@
                             <th class="centered">Quantidade</th>
                             <th class="centered">Ações</th>
                         </tr>
-                        <tr ng-hide="addCtrl.ingredientList.length === 0" ng-repeat="ing in addCtrl.ingredientList">
+                        <tr ng-hide="addDessCtrl.ingredientList.length === 0" ng-repeat="ing in addDessCtrl.ingredientList">
                             <td class="centered">{{ing.name}}</td>
                             <td class="centered">{{ing.total_cost}}</td>
                             <td class="centered">{{ing.total_amount}}</td>
@@ -64,7 +64,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="4" ng-show="addCtrl.ingredientList.length === 0">Não existe Ingrediente cadastrado.</td>
+                            <td colspan="4" ng-show="addDessCtrl.ingredientList.length === 0">Não existe Ingrediente cadastrado.</td>
                         </tr>
                     </table>
                 </div>
@@ -73,24 +73,24 @@
                     <form name="ingredientForm" style="overflow: hidden;" novalidate>
                         <div class="col-md-8">
                             <label for="ingredientName" >Nome: </label>
-                            <input type="text" id="ingredientName" class="form-control" ng-model="addCtrl.ingredient.name"/>
+                            <input type="text" id="ingredientName" class="form-control" ng-model="addDessCtrl.ingredient.name"/>
                         </div>
                         <div class="col-md-4">
                             <label for="ingredientMetric">Unidade de medida: </label>
-                            <select id="ingredientMetric" class="form-control" ng-model="addCtrl.ingredient.metric" ng-options="option for option in addCtrl.metricList">
+                            <select id="ingredientMetric" class="form-control" ng-model="addDessCtrl.ingredient.metric" ng-options="option for option in addDessCtrl.metricList">
                                 <option value="">-------</option>
                             </select>
                         </div>
                         <div class="col-md-4 form-group">
                             <label for="ingredientTotalAmount">Peso/Volume Total: </label>
-                            <input type="number" id="ingredientTotalAmount" min="0" step="0.1" class="form-control" ng-model="addCtrl.ingredient.total_amount"/>
+                            <input type="number" id="ingredientTotalAmount" min="0" step="0.1" class="form-control" ng-model="addDessCtrl.ingredient.total_amount"/>
                         </div>
                         <div class="col-md-4 form-group">
                             <label for="ingredientCost">Preço: </label>
-                            <input type="number" id="ingredientCost" step="0.1" min="0" class="form-control" ng-model="addCtrl.ingredient.total_cost"/>
+                            <input type="number" id="ingredientCost" step="0.1" min="0" class="form-control" ng-model="addDessCtrl.ingredient.total_cost"/>
                         </div>
                         <div class="col-md-12">
-                            <button class="btn btn-primary " id="addIngredient" ng-click="addCtrl.addIngredient()"> Adicionar Igrediente</button>
+                            <button class="btn btn-primary " id="addIngredient" ng-click="addDessCtrl.addIngredient()"> Adicionar Igrediente</button>
                         </div>
                     </form>
                 </div>

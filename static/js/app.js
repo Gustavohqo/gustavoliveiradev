@@ -37,77 +37,52 @@ app.controller('AddDessertController', function($http,$scope){
     };
 });
 
-
+/*
+*
+*  CONTROLLER TO ADD A INGREDIENT TO A DESSERT AT DESSERT VIEW
+*
+* */
 app.controller('AddToDessertController',function($scope,$http){
     var self = this;
-
-    this.ingredientAdded= {};
-    this.addIngredientFlag = false;
+    this.myIngdnt = {};
     this.ingredientList = [];
-    this.myIngdnt = null;
-    this.ingredientAmount = null;
+    this.addIngredientFlag = false;
+
+    this.selectIngredient = function(){
+      if(this.addIngredientFlag){
+          this.addIngredientFlag = false;
+      }else {
+          this.addIngredientFlag = true;
+      }
+    };
 
     $http.get('/IngredientView').success(function(data){
-        for(var i = 0; i < data.length; i ++) {
+        for(var i = 0; i < data.length ; i ++){
             self.ingredientList.push(data[i]);
-            console.log(data[i]);
         }
     });
 
-    this.addToDessert = function(){
-        if( this.ingredientAmount !== null) {
-            this.ingredientAdded.ingredient = this.myIngdnt;
-            this.ingredientAdded.ingredientAmount = this.ingredientAmount;
-            return this.ingredientAdded;
-        }
-        else {
-            document.getElementByClass('amountInput').append(' has-error')
-        }
-    };
 
-    this.selectIngredient = function(){
-        if(this.myIngdnt === null) {
-            this.addIngredientFlag = false;
-            this.clearIngredient();
-        }else{
-            this.addIngredientFlag=true;
-        }
-        console.log('flag: ', this.addIngredientFlag)
-    };
 
-    this.editIngredient = function(edited){
-        //TODO
-    };
-
-    this.clearIngredient = function(){
-        this.addIngredientFlag = false;
-        this.myIngdnt = null;
-        this.ingredientAmount = null;
-        this.ingredientAdded = {};
-        console.log('clean');
-    };
 });
 
-app.controller('AddDessertController',function($scope,$http,$q){
+/*
+*
+*  CONTROLLER FOR INGREDIENT VIEW
+*
+**/
+app.controller('AddIngredientController',function($scope,$http,$q){
     this.metricList = ['Litro', 'Quilo', 'Unidade'];
     this.ingredient = {};
 
     var self = this;
     this.ingredientList = [];
 
-
     $http.get('/IngredientView').success(function(data){
         for(var i = 0; i < data.length; i ++) {
             self.ingredientList.push(data[i]);
             console.log(data[i]);
         }
-
-        //if(self.ingredientList.length === 0) {
-          //  console.log('data = 0');
-           // self.ingredientList = [{name:'Teste1', cost:2.00}, {name:'Teste2',cost:1.70}, {name:'Teste3', cost: 1.95}];
-            //console.log([{name:'Teste1', cost:2.00}, {name:'Teste2',cost:1.70}, {name:'Teste3', cost: 1.95}].length);
-            //console.log(self.ingredientList);
-        //}
     });
 
    this.addIngredient = function(){
@@ -116,11 +91,10 @@ app.controller('AddDessertController',function($scope,$http,$q){
         console.log(this.ingredient.total_cost);
         console.log(this.ingredient.total_amount);
         $http.post('/IngredientView',this.ingredient).success(function(data){
-             console.log(data);
+            console.log(data);
+            self.ingredientList.push(self.ingredient);
         });
    };
-
-
 
 });
 

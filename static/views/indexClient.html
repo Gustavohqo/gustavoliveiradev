@@ -16,7 +16,7 @@
     <meta charset="UTF-8">
     <title>DoceClara</title>
 </head>
-<body ng-controller="AddClientController as addCtrl">
+<body ng-controller="AddClientController as addDessCtrl">
  <div class="container">
          <header>
         <div >
@@ -39,12 +39,12 @@
             <form style="overflow: hidden;" novalidate>
                 <div class="form-group col-md-12">
                     <label for="clientName">Nome:</label>
-                    <input  type="text" id="clientName" name="clientName" class="form-control" ng-model="addCtrl.client.name" />
+                    <input  type="text" id="clientName" name="clientName" class="form-control" ng-model="addDessCtrl.client.name" />
                 </div>
                  <br/>
                  <div class="col-md-12 form-group">
                     <label for="telephone">Telefone: </label>
-                    <input type="text" id="telephone" name="telephone" class="form-control" ng-model="addCtrl.client.telephone"/>
+                    <input type="text" id="telephone" name="telephone" class="form-control" ng-model="addDessCtrl.client.telephone"/>
                 </div>
                 <br/>
                   <div class="col-md-12 form-group">
@@ -60,7 +60,7 @@
                 <br/>
                 <div class="col-md-12 form-group">
                     <label for="requestAmount">Quantidade do Pedido:</label>
-                    <input type="number" id="requestAmount" name="requestAmount" min="0" class="form-control" ng-model="addCtrl.client.requestAmount"/>
+                    <input type="number" id="requestAmount" name="requestAmount" min="0" class="form-control" ng-model="addDessCtrl.client.requestAmount"/>
                 </div>
                 <br/>
                 <div class="col-md-12 form-group">
@@ -70,7 +70,7 @@
                 <br/>
                  <div>
                     <button class=button id="backToList">Voltar</button>
-                    <button class=button id="addDessert" ng-click="addCtrl.addDessert()">Adicionar</button>
+                    <button class=button id="addDessert" ng-click="addDessCtrl.addDessert()">Adicionar</button>
                 </div>
 
             </form>
