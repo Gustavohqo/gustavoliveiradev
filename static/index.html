@@ -12,27 +12,40 @@
     <meta charset="UTF-8">
     <title>DoceClara</title>
 </head>
-<body ng-controller="AddDessertController as addDessCtrl">
+<body id="container" ng-controller="AddDessertController as addCtrl">
     <header>
-        <nav>
-            <ul>
-                <li class="nav">
-                    <a href="views/indexDessert.html">Sobremesas</a>
-                </li>
-                <li class="nav">
-                    <a href="views/indexClient.html">Clientes</a>
-                </li>
-                <li class="nav">
-                    Resumo
-                </li>
-            </ul>
-        </nav>
+            <div >
+                <nav class="nav">
+                    <ul>
+                        <li><a href="/">Início</a></li>
+                        <li><a href="/client">Clientes</a></li>
+                        <li><a href="/dessert">Sobremesas</a></li>
+                        <li><a href="/ingredient">Ingredientes</a></li>
+                        <li><a href="">Resumo</a></li>
+                    </ul>
+                 </nav>
+            </div>
     </header>
-    <section>
-        <h1> Doce Clara</h1>
-        <h2> Bem Vindo </h2>
-        <hr>
+    <!-- ENDING MENU-BAR-->
+    <!--
+    TODO Nav bar
+    -->
+    <aside>
+        <div id="sidebar" class="nav-collapse" style="overflow: hidden; outline: none;"></div>
+    </aside>
+    <!-- ENDING SIDE BAR-->
+    <section id="main-content">
+        <div class="wrapper">
+            <section>
 
+            </section>
+            <section>
+
+            </section>
+            <section>
+
+            </section>
+        </div>
     </section>
 </body>
 </html>

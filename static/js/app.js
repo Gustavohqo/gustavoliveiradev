@@ -8,7 +8,8 @@ var app = angular.module('app',[]);
 app.controller('AddDessertController', function($http,$scope){
     this.dessert = {};
     this.newIngredientFlag = false;
-    this.dessert.ingredientes = [];
+    this.dessert.ingredientList = [];
+    $scope.cost = 0.0;
 
     this.setNewIngrtFlag = function(){
         if(!this.newIngredientFlag) {
@@ -19,6 +20,19 @@ app.controller('AddDessertController', function($http,$scope){
         }
 
         console.log(this.newIngredientFlag);
+    };
+
+    this.getCost = function() {
+        var cost = 0.0;
+        for(var i = 0; i < this.dessert.ingredientList.length; i++){
+            console.log("custo da sobremesa: ", this.dessert.ingredientList[i].ingredient.total_cost);
+            var unit_cost =
+            cost = cost + (this.dessert.ingredientList[i].ingredient.total_cost/this.dessert.ingredientList[i].quantity);
+        }
+
+        console.log("custo da sobremesa: ", cost);
+        cost = cost/this.dessert.portionAmount;
+        return cost;
     };
 
     this.addDessert = function() {
@@ -32,8 +46,10 @@ app.controller('AddDessertController', function($http,$scope){
 
     this.addIngredient = function(newIngredient){
         console.log(newIngredient.ingredient.name);
-        this.dessert.ingredientes.push(newIngredient);
-        console.log(this.dessert.ingredientes[0].ingredient.name);
+        console.log(newIngredient.quantity);
+        this.dessert.ingredientList.push(newIngredient);
+        console.log(this.dessert.ingredientList[0].ingredient.name);
+        $scope.cost = this.getCost();
     };
 });
 
@@ -49,11 +65,16 @@ app.controller('AddToDessertController',function($scope,$http){
     this.addIngredientFlag = false;
 
     this.selectIngredient = function(){
-      if(this.addIngredientFlag){
-          this.addIngredientFlag = false;
-      }else {
+      if(this.myIngdnt.ingredient !== null){
           this.addIngredientFlag = true;
+      }else {
+          this.addIngredientFlag = false;
       }
+    };
+
+    this.clearIngredient = function (){
+        this.myIngdnt = {};
+        this.addIngredientFlag = false;
     };
 
     $http.get('/IngredientView').success(function(data){
@@ -72,9 +93,9 @@ app.controller('AddToDessertController',function($scope,$http){
 *
 **/
 app.controller('AddIngredientController',function($scope,$http,$q){
-    this.metricList = ['Litro', 'Quilo', 'Unidade'];
+   this.metricList = [{representation:'L', name:'Litro'}, {representation:'Kg', name:'Quilo'}, {representation:'Un', name:'Unidade'}];
     this.ingredient = {};
-
+    $scope.metric = {};
     var self = this;
     this.ingredientList = [];
 
@@ -86,14 +107,15 @@ app.controller('AddIngredientController',function($scope,$http,$q){
     });
 
    this.addIngredient = function(){
-        console.log(this.ingredient.name);
-        console.log(this.ingredient.metric);
-        console.log(this.ingredient.total_cost);
-        console.log(this.ingredient.total_amount);
-        $http.post('/IngredientView',this.ingredient).success(function(data){
-            console.log(data);
-            self.ingredientList.push(self.ingredient);
-        });
+       this.ingredient.metric = $scope.metric.name;
+       console.log(this.ingredient.name);
+       console.log(this.ingredient.metric);
+       console.log(this.ingredient.total_cost);
+       console.log(this.ingredient.total_amount);
+       $http.post('/IngredientView',this.ingredient).success(function(data){
+           console.log(data);
+           self.ingredientList.push(self.ingredient);
+       });
    };
 
 });

@@ -33,12 +33,14 @@
                  </nav>
             </div>
         </header>
+        <!-- ENDING MENU-BAR-->
         <!--
         TODO Nav bar
         -->
         <aside>
             <div id="sidebar" class="nav-collapse" style="overflow: hidden; outline: none;"></div>
         </aside>
+        <!-- ENDING SIDE BAR-->
         <div id="main-content">
             <section class="wrapper">
                 <div  class="page-header">
@@ -62,7 +64,7 @@
                             <label class="control-label"> Preço de custo:</label>
                             <div class="input-group">
                                 <div class="input-group-addon">$</div>
-                                <p id="portionCost" class="form-control">{{addDessCtrl.dessert.price}}</p>
+                                <p id="portionCost" class="form-control">{{cost | number:2}}</p>
                                 <div class="input-group-addon"></div>
                             </div>
                         </div>
@@ -97,10 +99,10 @@
                                     <th>Quantidade</th>
                                     <th>Ações</th>
                                 </tr>
-                                <tr ng-hide="addDessCtrl.dessert.ingredientes.length === 0" ng-repeat="ing in addDessCtrl.dessert.ingredientes">
+                                <tr ng-hide="addDessCtrl.dessert.ingredientes.length === 0" ng-repeat="ing in addDessCtrl.dessert.ingredientList">
                                     <td>{{ing.ingredient.name}}</td>
-                                    <td>{{ing.ingredient.cost}}</td>
-                                    <td>{{ing.ingredientAmount}}</td>
+                                    <td>{{(ing.ingredient.total_cost*ing.quantity)/ing.ingredient.total_amount | number:2}}</td>
+                                    <td>{{ing.quantity | number:3}}</td>
                                     <td>
                                         <button class="btn btn-primary btn-xs" title="Editar"><span class="fa fa-edit"></span></button>
                                         <button class="btn btn-danger btn-xs" title="Excluir"><span class="fa fa-trash-o"></span></button>
@@ -115,7 +117,9 @@
                                     <a href="/"><button id="backToList" class="btn btn-primary" >Voltar </button></a>
                                 </div>
                                 <div>
-                                  <button id="addDessert" class="btn btn-primary" ng-click="addDessCtrl.addDessert()">Adicionar</button>
+                                  <button id="addDessert" class="btn btn-primary" ng-click="addDessCtrl.addDessert()"
+                                  style="margin-right: 10px;">
+                                      Adicionar</button>
                                 </div>
                             </div>
                         </div>
