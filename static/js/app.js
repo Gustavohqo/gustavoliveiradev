@@ -5,6 +5,28 @@
 
 var app = angular.module('app',[]);
 
+/*
+*
+*  DESSERT VIEW
+*
+*  */
+app.controller('DessertControler', function($http){
+    var self = this;
+    this.dessertList = [];
+
+    $http.get('/Dessert').success(function(data){
+        for(var i = 0; i < data.length ; i ++){
+            self.dessertList.push(data[i]);
+        }
+        console.log(data.length);
+    });
+});
+
+/*
+*
+*  ADD_DESSERT VIEW
+*
+*  */
 app.controller('AddDessertController', function($http,$scope){
     this.dessert = {};
     this.newIngredientFlag = false;
@@ -115,6 +137,8 @@ app.controller('AddIngredientController',function($scope,$http,$q){
        $http.post('/IngredientView',this.ingredient).success(function(data){
            console.log(data);
            self.ingredientList.push(self.ingredient);
+           self.ingredient = {};
+           $scope.metric = {};
        });
    };
 

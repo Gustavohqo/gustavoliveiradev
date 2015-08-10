@@ -37,10 +37,10 @@ class Client(ndb.Model):
     dessert_cost = ndb.BooleanProperty(indexed=False)
 
 
-class Main(webapp2.RequestHandler):
+class DessertService(webapp2.RequestHandler):
     def get(self):
-        logging.debug("LOG: GET-TEST")
-        self.response.out.write("BEM VINDO")
+        dessertList = json.dumps([dessert.to_dict() for dessert in Dessert.query().fetch()])
+        self.response.write(dessertList)
 
     def post(self):
         logging.debug("LOG: POST-")
@@ -77,7 +77,7 @@ class IngredientService(webapp2.RequestHandler):
 
 
 app = webapp2.WSGIApplication([
- ('/Dessert', Main),
+ ('/Dessert', DessertService),
  ('/Client', MainClient),
  ('/IngredientView', IngredientService),
 ], debug=True)
