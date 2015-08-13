@@ -47,7 +47,7 @@
                 </div>
             </div>
         </aside>
-        <div id="main-content" ng-controller="AddClientController as addDessCtrl">
+        <div id="main-content" ng-controller="AddClientController as addCltCtrl">
             <div class="wrapper">
                 <div class="page-header">
                     <h3>Clientes</h3>
@@ -60,7 +60,7 @@
                             <th class="centered">Telefone</th>
                             <th class="centered">Ações</th>
                         </tr>
-                        <tr ng-hide="addDessCtrl.clientList.length === 0" ng-repeat="clt in addDessCtrl.clientList">
+                        <tr ng-hide="addCltCtrl.clientList.length === 0" ng-repeat="clt in addCltCtrl.clientList">
                             <td class="centered"></td>
                             <td class="centered"></td>
                             <td >
@@ -70,7 +70,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="4" ng-show="addDessCtrl.clientList.length === 0">Não existe Cliente cadastrado.</td>
+                            <td colspan="4" ng-show="addCltCtrl.clientList.length === 0">Não existe Cliente cadastrado.</td>
                         </tr>
                     </table>
                 </div>
@@ -79,16 +79,16 @@
                     <form name="clientForm" style="overflow: hidden;" novalidate>
                         <div class="col-md-8">
                             <label for="clientName" >Nome: </label>
-                            <input type="text" id="clientName" class="form-control" ng-model="addDessCtrl.client.name"/>
+                            <input type="text" id="clientName" class="form-control" ng-model="addCltCtrl.client.name"/>
                         </div>
                         <div class="col-md-8">
                             <label for="clientTelephone" >Telefone: </label>
-                            <input type="text" id="clientTelephone" class="form-control" ng-model="addDessCtrl.client.telephone"/>
+                            <input type="text" id="clientTelephone" class="form-control" ng-model="addCltCtrl.client.telephone"/>
                         </div>
 
 
                         <div class="col-md-12">
-                            <button class="btn btn-primary " id="addClient" ng-click="addDessCtrl.addClient()"> Adicionar cliente</button>
+                            <button class="btn btn-primary " id="addClient" ng-click="addCltCtrl.addClient()"> Adicionar cliente</button>
                         </div>
                     </form>
                 </div>
