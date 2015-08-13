@@ -63,8 +63,8 @@
                         </tr>
                         <tr ng-hide="addDessCtrl.ingredientList.length === 0" ng-repeat="ing in addDessCtrl.ingredientList">
                             <td class="centered">{{ing.name}}</td>
-                            <td class="centered">{{ing.total_cost}}</td>
-                            <td class="centered">{{ing.total_amount}}</td>
+                            <td class="centered">{{ing.total_cost | currency:"R$"}}</td>
+                            <td class="centered">{{ing.total_amount | number:"2"}}</td>
                             <td>
                                 <div class="div-centered"><button class="btn btn-primary btn-xs" title="Editar"><span class="fa fa-edit"></span></button></div>
                                 <div class="div-centered"><button class="btn btn-danger btn-xs" title="Excluir"><span class="fa fa-trash-o"></span></button></div>
