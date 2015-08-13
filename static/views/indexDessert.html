@@ -28,6 +28,7 @@
                         <li><a href="/client">Clientes</a></li>
                         <li><a href="/dessert">Sobremesas</a></li>
                         <li><a href="/ingredient">Ingredientes</a></li>
+                        <li><a href="/request">Pedidos</a></li>
                         <li><a href="">Resumo</a></li>
                     </ul>
                  </nav>
@@ -77,7 +78,7 @@
                         </div>
                         <section ng-controller="AddToDessertController as addIngre">
                             <div class="col-md-6 form-group ">
-                                <label for="ingredientsList"> Adicione um ingredientes: </label>
+                                <label for="ingredientsList"> Adicione um ingrediente: </label>
                                 <select class="form-control" id="ingredientsList" ng-model="addIngre.myIngdnt.ingredient"
                                         ng-options="ingdnt.name for ingdnt in addIngre.ingredientList"
                                         ng-change="addIngre.selectIngredient()">
@@ -97,7 +98,7 @@
                                 </button>
                             </div>
                         </section>
-                        <div>
+                       < div>
                             <table class="table table-hover">
                                 <caption>Ingredientes</caption>
                                 <tr>
@@ -128,7 +129,7 @@
                                   style="margin-right: 10px;">
                                       Adicionar</button>
                                 </div>
-                            </div>
+
                         </div>
                     </form>
                 </div>

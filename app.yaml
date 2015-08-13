@@ -26,6 +26,10 @@ handlers:
   static_files: static/views/ingredientView/mainIngredient.html
   upload: static/views/ingredientView/mainIngredient.html
 
+- url: /request
+  static_files: static/views/requestView/mainRequest.html
+  upload: static/views/requestView/mainRequest.html
+
 - url: /
   static_files: static/index.html
   upload: static/index.html

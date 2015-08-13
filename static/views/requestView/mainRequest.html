@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
     <link type="text/css" rel="stylesheet" href="../stylesheets/main.css" />
     <!--<script src="js/angular-1.3.0/angular.js"></script>-->
-    <script  type="text/javascript" src="../js/appClient.js" ></script>
+    <script  type="text/javascript" src="../js/app.js" ></script>
     <meta charset="UTF-8">
     <title>DoceClara</title>
 </head>
@@ -25,7 +25,7 @@
                 <nav class="nav">
                     <ul>
                         <li><a href="/">Início</a></li>
-                        <li><a href="/cliente">Clientes</a></li>
+                        <li><a href="/client">Clientes</a></li>
                         <li><a href="/dessert">Sobremesas</a></li>
                         <li><a href="/ingredient">Ingredientes</a></li>
                         <li><a href="/request">Pedidos</a></li>
@@ -47,48 +47,57 @@
                 </div>
             </div>
         </aside>
-        <div id="main-content" ng-controller="AddClientController as addDessCtrl">
+        <div id="main-content" ng-controller="AddRequestController as addDessCtrl">
             <div class="wrapper">
                 <div class="page-header">
-                    <h3>Clientes</h3>
+                    <h3>Novo Pedido</h3>
                 </div>
                 <div  class="col-md-8 showback">
                     <table class="table table-hover">
-                        <caption class="centered">Clientes Cadastrados</caption>
+                        <caption class="centered">Pedidos</caption>
                         <tr>
                             <th class="centered">Nome</th>
-                            <th class="centered">Telefone</th>
+                            <th class="centered">Valor</th>
+                            <th class="centered">Quantidade</th>
                             <th class="centered">Ações</th>
                         </tr>
-                        <tr ng-hide="addDessCtrl.clientList.length === 0" ng-repeat="clt in addDessCtrl.clientList">
-                            <td class="centered"></td>
-                            <td class="centered"></td>
-                            <td >
+                        <tr ng-hide="addDessCtrl.requestList.length === 0" ng-repeat="rqt in addDessCtrl.requestList">
+                            <td class="centered">{{rqt.name}}</td>
+                            <td class="centered">{{rqt.total_cost}}</td>
+                            <td class="centered">{{rqt.request_quant}}</td>
+                            <td>
                                 <div class="div-centered"><button class="btn btn-primary btn-xs" title="Editar"><span class="fa fa-edit"></span></button></div>
-                                 <div class="div-centered"><button class="btn btn-danger btn-xs" title="Excluir"><span class="fa fa-trash-o"></span></button></div>
-                                <div style="width: 60px" class="div-centered"><button class="btn btn-primary btn-xs" title="Novo Pedido"><span class="fa fa-shopping-cart"></span></button></div>
+                                <div class="div-centered"><button class="btn btn-danger btn-xs" title="Excluir"><span class="fa fa-trash-o"></span></button></div>
+
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="4" ng-show="addDessCtrl.clientList.length === 0">Não existe Cliente cadastrado.</td>
+                            <td colspan="4" ng-show="addDessCtrl.requestList.length === 0">Não existe Pedido cadastrado.</td>
                         </tr>
                     </table>
                 </div>
 
                 <div class="col-md-8 showback">
-                    <form name="clientForm" style="overflow: hidden;" novalidate>
+                    <form name="requestForm" style="overflow: hidden;" novalidate>
                         <div class="col-md-8">
-                            <label for="clientName" >Nome: </label>
-                            <input type="text" id="clientName" class="form-control" ng-model="addDessCtrl.client.name"/>
+                            <label for="requestName" >Nome: </label>
+                            <input type="text" id="requestName" class="form-control" ng-model="addDessCtrl.request.name"/>
                         </div>
-                        <div class="col-md-8">
-                            <label for="clientTelephone" >Telefone: </label>
-                            <input type="text" id="clientTelephone" class="form-control" ng-model="addDessCtrl.client.telephone"/>
+                        <div class="col-md-4 form-group">
+                            <label for="requestTotalQuant">Quantidade Total: </label>
+                            <div class="input-group">
+                                <input type="number" id="requestTotalQuant" min="0" step="1" class="form-control" ng-model="addDessCtrl.request.request_quant"/>
+                            </div>
                         </div>
-
-
+                        <div class="col-md-4 form-group">
+                            <label for="requestCost">Valor: </label>
+                            <div class="input-group">
+                                <div class="input-group-addon">$</div>
+                                <input type="number" id="requestCost" step="0.1" min="0" class="form-control" ng-model="addDessCtrl.request.total_cost"/>
+                            </div>
+                        </div>
                         <div class="col-md-12">
-                            <button class="btn btn-primary " id="addClient" ng-click="addDessCtrl.addClient()"> Adicionar cliente</button>
+                            <button class="btn btn-primary " id="addRequest" ng-click="addDessCtrl.addRequest()"> Adicionar Pedido</button>
                         </div>
                     </form>
                 </div>

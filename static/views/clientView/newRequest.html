@@ -1,0 +1,28 @@
+<div  ng-show="addDessCtrl.newRequestFlag">
+    <h3>Novo Pedido</h3>
+    <hr>
+    <div class="col-md-8 form-group">
+        <div class="col-md-6">
+        <label for="requestName" >Nome: </label>
+        <input type="text" id="requestName" class="form-control" ng-model="addRqst.request.name"/>
+        </div>
+
+    </div>
+    <div class="col-md-6 form-group">
+        <label for="requestTotalQuant">Quantidade Total: </label>
+        <input type="number" id="requestTotalQuant" min="0" step="0.1" class="form-control" ng-model="addRqst.request.requestTotalQuant"/>
+    </div>
+    <div class="col-md-6 form-group">
+        <label for="requestCost">Valor Total: </label>
+        <input type="number" id="requestCost" step="0.1" min="0" class="form-control" ng-model="addRqst.request.requestTotalCost"/>
+        <button id="addRequest" ng-click="addDessCtrl.addRequest(addRqst.request)"> Adicionar Pedido</button>
+    </div>
+</div>
+
+<div class="col-sm-12 requestField">
+    <div class="buttonSeparator"></div>
+    <button id="requests" class="requestButtonPlus btn" title="Novo Pedido" ng-click="addDessCtrl.setNewRequestFlag(); addRqst.clearRequest()">
+        <span ng-if="!addDessCtrl.newRequestFlag" class="fa fa-plus fa-2x icon"></span>
+        <span ng-if="addDessCtrl.newRequestFlag" class="fa fa-minus fa-2x icon"></span>
+    </button>
+</div>
