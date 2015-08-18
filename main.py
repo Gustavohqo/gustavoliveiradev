@@ -11,18 +11,6 @@ import json
 
 import webapp2
 
-class Ingredient(ndb.Model):
-    name = ndb.StringProperty(indexed=False)
-    total_amount = ndb.FloatProperty(indexed=False)
-    metric = ndb.StringProperty(indexed=False)
-    total_cost = ndb.FloatProperty(indexed=False)
-
-class Request(ndb.Model):
-    name = ndb.StringProperty(indexed=False)
-    request_quant = ndb.FloatProperty(indexed=False)
-    metric = ndb.StringProperty(indexed=False)
-    total_cost = ndb.FloatProperty(indexed=False)
-
 class Dessert(ndb.Model):
     """Model Sobremesa"""
     name = ndb.StringProperty(indexed=False)
@@ -35,7 +23,19 @@ class Client(ndb.Model):
     """Model Cliente"""
     name = ndb.StringProperty(indexed=False)
     telephone = ndb.StringProperty(indexed=False)
-    request_dest = ndb.StringProperty(indexed=False)
+    request = ndb.StructuredProperty(Request, repeated=True)
+
+class Ingredient(ndb.Model):
+    name = ndb.StringProperty(indexed=False)
+    total_amount = ndb.FloatProperty(indexed=False)
+    metric = ndb.StringProperty(indexed=False)
+    total_cost = ndb.FloatProperty(indexed=False)
+
+class Request(ndb.Model):
+    name = ndb.StringProperty(indexed=False)
+    total_amount = ndb.FloatProperty(indexed=False)
+    metric = ndb.StringProperty(indexed=False)
+    total_cost = ndb.FloatProperty(indexed=False)
 
 
 class DessertService(webapp2.RequestHandler):
@@ -52,7 +52,11 @@ class DessertService(webapp2.RequestHandler):
 
         self.response.write(newDessert.name)
 
-class MainClient(webapp2.RequestHandler):
+class ClientService(webapp2.RequestHandler):
+    def get(self):
+        clientList = json.dumps([client.to_dict() for client in Client.query().fetch()])
+        self.response.write(clientList)
+
     def post(self):
         logging.debug("LOG: POST-")
         client = json.loads(self.request.body)
@@ -93,7 +97,7 @@ class RequestService(webapp2.RequestHandler):
 
 app = webapp2.WSGIApplication([
  ('/Dessert', DessertService),
- ('/Client', MainClient),
+ ('/Client', ClientService),
  ('/IngredientView', IngredientService),
  ('/RequestView', RequestService),
 ], debug=True)
