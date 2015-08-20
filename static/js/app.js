@@ -10,9 +10,10 @@ var app = angular.module('app',[]);
 *  DESSERT VIEW
 *
 *  */
-app.controller('DessertControler', function($http){
+app.controller('DessertControler', function($http,$scope){
     var self = this;
     this.dessertList = [];
+    $scope.currentPage= 1;
 
     $http.get('/Dessert').success(function(data){
         for(var i = 0; i < data.length ; i ++){
@@ -30,8 +31,9 @@ app.controller('DessertControler', function($http){
 app.controller('AddDessertController', function($http,$scope){
     this.dessert = {};
     this.newIngredientFlag = false;
-    this.dessert.ingredientList = [];
+    this.dessert.ingredient_list = [];
     $scope.cost = 0.0;
+    $scope.portion_amount = 0;
 
     this.setNewIngrtFlag = function(){
         if(!this.newIngredientFlag) {
@@ -46,19 +48,21 @@ app.controller('AddDessertController', function($http,$scope){
 
     this.getCost = function() {
         var cost = 0.0;
-        for(var i = 0; i < this.dessert.ingredientList.length; i++){
-            console.log("custo da sobremesa: ", this.dessert.ingredientList[i].ingredient.total_cost);
+        for(var i = 0; i < this.dessert.ingredient_list.length; i++){
+            console.log("custo da sobremesa: ", this.dessert.ingredient_list[i].ingredient.total_cost);
             var unit_cost =
-            cost = cost + (this.dessert.ingredientList[i].ingredient.total_cost/this.dessert.ingredientList[i].quantity);
+            cost = cost + (this.dessert.ingredient_list[i].ingredient.total_cost/this.dessert.ingredient_list[i].quantity);
         }
 
         console.log("custo da sobremesa: ", cost);
-        cost = cost/this.dessert.portionAmount;
+        cost = cost/$scope.portion_amount;
         return cost;
     };
 
     this.addDessert = function() {
         console.log("LOG: addDessert function");
+        this.dessert.portion_amount =$scope.portion_amount;
+        this.dessert.portion_cost = $scope.cost;
         //angular.toJson(this.dessert);
         $http.post('/Dessert', this.dessert).success(function(data){
             console.log(data);
@@ -67,11 +71,14 @@ app.controller('AddDessertController', function($http,$scope){
     };
 
     this.addIngredient = function(newIngredient){
-        console.log(newIngredient.ingredient.name);
-        console.log(newIngredient.quantity);
-        this.dessert.ingredientList.push(newIngredient);
-        console.log(this.dessert.ingredientList[0].ingredient.name);
-        $scope.cost = this.getCost();
+        //if($valid) {
+            console.log(newIngredient.ingredient.name);
+            console.log(newIngredient.quantity);
+            this.dessert.ingredient_list.push(newIngredient);
+            console.log(this.dessert.ingredient_list[0].ingredient.name);
+            $scope.cost = this.getCost();
+            console.log("custo da sobremesa: ", $scope.cost);
+        //}
     };
 });
 
