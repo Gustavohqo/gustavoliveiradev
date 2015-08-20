@@ -11,6 +11,12 @@ import json
 
 import webapp2
 
+class Ingredient(ndb.Model):
+    name = ndb.StringProperty(indexed=False)
+    total_amount = ndb.FloatProperty(indexed=False)
+    metric = ndb.StringProperty(indexed=False)
+    total_cost = ndb.FloatProperty(indexed=False)
+
 class Dessert(ndb.Model):
     """Model Sobremesa"""
     name = ndb.StringProperty(indexed=False)
@@ -19,23 +25,30 @@ class Dessert(ndb.Model):
     portion_cost = ndb.FloatProperty(indexed=False)
     cooker_name = ndb.StringProperty(indexed=False)
 
-class Client(ndb.Model):
-    """Model Cliente"""
-    name = ndb.StringProperty(indexed=False)
-    telephone = ndb.StringProperty(indexed=False)
-    request = ndb.StructuredProperty(Request, repeated=True)
-
-class Ingredient(ndb.Model):
-    name = ndb.StringProperty(indexed=False)
-    total_amount = ndb.FloatProperty(indexed=False)
-    metric = ndb.StringProperty(indexed=False)
-    total_cost = ndb.FloatProperty(indexed=False)
-
 class Request(ndb.Model):
     name = ndb.StringProperty(indexed=False)
     total_amount = ndb.FloatProperty(indexed=False)
     metric = ndb.StringProperty(indexed=False)
     total_cost = ndb.FloatProperty(indexed=False)
+
+class Client(ndb.Model):
+    """Model Cliente"""
+    name = ndb.StringProperty(indexed=False)
+    telephone = ndb.StringProperty(indexed=False)
+
+
+class IngredientService(webapp2.RequestHandler):
+    def get(self):
+        ingredientList = json.dumps([ing.to_dict() for ing in Ingredient.query().fetch()])
+        self.response.write(ingredientList)
+    def post(self):
+        newIngredient = json.loads(self.request.body)
+        ingredient = Ingredient()
+        ingredient.name = newIngredient["name"]
+        ingredient.total_amount = newIngredient["total_amount"]
+        ingredient.metric = newIngredient["metric"]
+        ingredient.total_cost = newIngredient["total_cost"]
+        ingredient.put()
 
 
 class DessertService(webapp2.RequestHandler):
@@ -52,6 +65,19 @@ class DessertService(webapp2.RequestHandler):
 
         self.response.write(newDessert.name)
 
+class RequestService(webapp2.RequestHandler):
+    def get(self):
+        requestList = json.dumps([ing.to_dict() for ing in Request.query().fetch()])
+        self.response.write(requestList)
+    def post(self):
+        newRequest = json.loads(self.request.body)
+        request = Request()
+        request.name = newRequest["name"]
+        request.request_quant = newRequest["request_quant"]
+        request.metric = newRequest["metric"]
+        request.total_cost = newRequest["total_cost"]
+        request.put()
+
 class ClientService(webapp2.RequestHandler):
     def get(self):
         clientList = json.dumps([client.to_dict() for client in Client.query().fetch()])
@@ -67,37 +93,10 @@ class ClientService(webapp2.RequestHandler):
 
         self.response.write(newClient.name)
 
-class IngredientService(webapp2.RequestHandler):
-    def get(self):
-        ingredientList = json.dumps([ing.to_dict() for ing in Ingredient.query().fetch()])
-        self.response.write(ingredientList)
-    def post(self):
-        newIngredient = json.loads(self.request.body)
-        ingredient = Ingredient()
-        ingredient.name = newIngredient["name"]
-        ingredient.total_amount = newIngredient["total_amount"]
-        ingredient.metric = newIngredient["metric"]
-        ingredient.total_cost = newIngredient["total_cost"]
-        ingredient.put()
-
-
-class RequestService(webapp2.RequestHandler):
-    def get(self):
-        requestList = json.dumps([ing.to_dict() for ing in Request.query().fetch()])
-        self.response.write(requestList)
-    def post(self):
-        newRequest = json.loads(self.request.body)
-        request = Request()
-        request.name = newRequest["name"]
-        request.request_quant = newRequest["request_quant"]
-        request.metric = newRequest["metric"]
-        request.total_cost = newRequest["total_cost"]
-        request.put()
-
 
 app = webapp2.WSGIApplication([
  ('/Dessert', DessertService),
- ('/Client', ClientService),
+ ('/client', ClientService),
  ('/IngredientView', IngredientService),
- ('/RequestView', RequestService),
+ ('/request', RequestService),
 ], debug=True)
