@@ -15,8 +15,12 @@ handlers:
   static_dir: static/images
 
 - url: /client
-  static_files: static/views/indexClient.html
-  upload: static/views/indexClient.html
+  static_files: static/views/clientView/indexClient.html
+  upload: static/views/clientView/indexClient.html
+
+- url: /addClient
+  static_files: static/views/clientView/includes/addClientView.html
+  upload: static/views/clientView/includes/addClientView.html
 
 - url: /dessert
   static_files: static/views/dessertView/indexDessert.html

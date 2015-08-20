@@ -2,20 +2,20 @@
 <html ng-app='app'>
 <head>
     <!--Image Tittle-->
-    <link rel="shortcut icon" type="image/jpg" href="/img/image.jpg">
+    <link rel="shortcut icon" type="image/jpg" href="img/image.jpg">
     <!--Bootstrao css-->
-    <link rel="stylesheet" href="../stylesheets/bootstrap-3.3.5-dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="../../stylesheets/bootstrap-3.3.5-dist/css/bootstrap.min.css"/>
     <!--Font-Awesome css-->
-    <link rel="stylesheet" href="../stylesheets/bootstrap-3.3.5-dist/font-awesome-4.3.0/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="../../stylesheets/bootstrap-3.3.5-dist/font-awesome-4.3.0/css/font-awesome.min.css"/>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
-    <link type="text/css" rel="stylesheet" href="../stylesheets/main.css" />
+    <link type="text/css" rel="stylesheet" href="../../stylesheets/main.css" />
     <!--<script src="js/angular-1.3.0/angular.js"></script>-->
-    <script  type="text/javascript" src="../js/appClient.js" ></script>
+    <script  type="text/javascript" src="../../js/appCliente.js" ></script>
     <meta charset="UTF-8">
     <title>DoceClara</title>
 </head>
-<body>
+<body ng-controller="ClientControler as clientCtrl">
     <div id="container">
         <!--
         TOP Nav-bar
@@ -25,7 +25,7 @@
                 <nav class="nav">
                     <ul>
                         <li><a href="/">Início</a></li>
-                        <li><a href="/cliente">Clientes</a></li>
+                        <li><a href="/client">Clientes</a></li>
                         <li><a href="/dessert">Sobremesas</a></li>
                         <li><a href="/ingredient">Ingredientes</a></li>
                         <li><a href="/request">Pedidos</a></li>
@@ -34,6 +34,7 @@
                  </nav>
             </div>
         </header>
+        <!-- ENDING MENU-BAR-->
         <!--
         TODO Nav bar
         -->
@@ -47,52 +48,37 @@
                 </div>
             </div>
         </aside>
-        <div id="main-content" ng-controller="AddClientController as addCltCtrl">
-            <div class="wrapper">
+        <!-- ENDING SIDE BAR-->
+        <div id="main-content">
+            <section class="wrapper">
                 <div class="page-header">
                     <h3>Clientes</h3>
                 </div>
-                <div  class="col-md-8 showback">
+                <section  class="col-md-8 showback">
+                    <button class="btn btn-primary" onclick="location.href='/addClient'"><i class="fa fa-plus"></i><span>Adicionar</span></button>
                     <table class="table table-hover">
-                        <caption class="centered">Clientes Cadastrados</caption>
+                        <caption class="centered">CLIENTES</caption>
                         <tr>
                             <th class="centered">Nome</th>
                             <th class="centered">Telefone</th>
                             <th class="centered">Ações</th>
                         </tr>
-                        <tr ng-hide="addCltCtrl.clientList.length === 0" ng-repeat="clt in addCltCtrl.clientList">
-                            <td class="centered"></td>
-                            <td class="centered"></td>
-                            <td >
+                        <tr ng-hide="clientCtrl.clientList.length === 0" ng-repeat="ing in clientCtrl.clientList">
+                            <td class="centered">{{ing.name}}</td>
+                            <td class="centered">{{ing.telephone}}</td>
+
+                            <td>
                                 <div class="div-centered"><button class="btn btn-primary btn-xs" title="Editar"><span class="fa fa-edit"></span></button></div>
-                                 <div class="div-centered"><button class="btn btn-danger btn-xs" title="Excluir"><span class="fa fa-trash-o"></span></button></div>
+                                <div class="div-centered"><button class="btn btn-danger btn-xs" title="Excluir"><span class="fa fa-trash-o"></span></button></div>
                                 <div style="width: 60px" class="div-centered"><button class="btn btn-primary btn-xs" title="Novo Pedido"><span class="fa fa-shopping-cart"></span></button></div>
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="4" ng-show="addCltCtrl.clientList.length === 0">Não existe Cliente cadastrado.</td>
+                            <td colspan="5" class="centered" ng-show="clientCtrl.clientList.length === 0">Não existem Clientes cadastrados.</td>
                         </tr>
                     </table>
-                </div>
-
-                <div class="col-md-8 showback">
-                    <form name="clientForm" style="overflow: hidden;" novalidate>
-                        <div class="col-md-8">
-                            <label for="clientName" >Nome: </label>
-                            <input type="text" id="clientName" class="form-control" ng-model="addCltCtrl.client.name"/>
-                        </div>
-                        <div class="col-md-8">
-                            <label for="clientTelephone" >Telefone: </label>
-                            <input type="text" id="clientTelephone" class="form-control" ng-model="addCltCtrl.client.telephone"/>
-                        </div>
-
-
-                        <div class="col-md-12">
-                            <button class="btn btn-primary " id="addClient" ng-click="addCltCtrl.addClient()"> Adicionar cliente</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
+                </section>
+            </section>
         </div>
     </div>
 </body>

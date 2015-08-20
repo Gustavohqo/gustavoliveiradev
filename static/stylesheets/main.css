@@ -49,6 +49,11 @@ i.fa {
     float: left;
 }
 
+.newclient {
+    margin-top: 0px;
+    float: left;
+}
+
 .form-group {
     margin-top: 10px;
 }
@@ -235,4 +240,9 @@ ul.sidebar-menu {
 /*          INGREDIENT VIEW             */
 .metric {
     width: 45px;
+}
+
+/*          CLIENT VIEW                */
+.addToClientBtn {
+    margin-top: 24.5px;
 }

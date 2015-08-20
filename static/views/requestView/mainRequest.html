@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
     <link type="text/css" rel="stylesheet" href="../stylesheets/main.css" />
     <!--<script src="js/angular-1.3.0/angular.js"></script>-->
-    <script  type="text/javascript" src="../js/app.js" ></script>
+    <script  type="text/javascript" src="../js/appCliente.js" ></script>
     <meta charset="UTF-8">
     <title>DoceClara</title>
 </head>
@@ -47,7 +47,7 @@
                 </div>
             </div>
         </aside>
-        <div id="main-content" ng-controller="AddRequestController as addDessCtrl">
+        <div id="main-content" ng-controller="AddRequestController as addRqstCtrl">
             <div class="wrapper">
                 <div class="page-header">
                     <h3>Novo Pedido</h3>
@@ -61,10 +61,10 @@
                             <th class="centered">Quantidade</th>
                             <th class="centered">Ações</th>
                         </tr>
-                        <tr ng-hide="addDessCtrl.requestList.length === 0" ng-repeat="rqt in addDessCtrl.requestList">
-                            <td class="centered">{{rqt.name}}</td>
-                            <td class="centered">{{rqt.total_cost}}</td>
-                            <td class="centered">{{rqt.request_quant}}</td>
+                        <tr ng-hide="addRqstCtrl.request.length === 0" ng-repeat="ing in addRqstCtrl.requestList">
+                            <td class="centered">{{ing.name}}</td>
+                            <td class="centered">{{ing.total_cost | currency:"R$"}}</td>
+                            <td class="centered">{{ing.total_amount | number:"2"}}</td>
                             <td>
                                 <div class="div-centered"><button class="btn btn-primary btn-xs" title="Editar"><span class="fa fa-edit"></span></button></div>
                                 <div class="div-centered"><button class="btn btn-danger btn-xs" title="Excluir"><span class="fa fa-trash-o"></span></button></div>
@@ -72,7 +72,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="4" ng-show="addDessCtrl.requestList.length === 0">Não existe Pedido cadastrado.</td>
+                            <td colspan="4" ng-show="addRqstCtrl.requestList.length === 0">Não existe Pedido Cadastrado.</td>
                         </tr>
                     </table>
                 </div>
@@ -81,23 +81,24 @@
                     <form name="requestForm" style="overflow: hidden;" novalidate>
                         <div class="col-md-8">
                             <label for="requestName" >Nome: </label>
-                            <input type="text" id="requestName" class="form-control" ng-model="addDessCtrl.request.name"/>
-                        </div>
+                            <input type="text" id="requestName" class="form-control" ng-model="addRqstCtrl.request.name"/>
+
                         <div class="col-md-4 form-group">
-                            <label for="requestTotalQuant">Quantidade Total: </label>
+                            <label for="requestTotalAmount">Quantidade: </label>
                             <div class="input-group">
-                                <input type="number" id="requestTotalQuant" min="0" step="1" class="form-control" ng-model="addDessCtrl.request.request_quant"/>
+                                <input type="number" id="requestTotalAmount" min="0" step="0.1" class="form-control" ng-model="addRqstCtrl.request.total_amount"/>
+
                             </div>
                         </div>
                         <div class="col-md-4 form-group">
                             <label for="requestCost">Valor: </label>
                             <div class="input-group">
                                 <div class="input-group-addon">$</div>
-                                <input type="number" id="requestCost" step="0.1" min="0" class="form-control" ng-model="addDessCtrl.request.total_cost"/>
+                                <input type="number" id="requestCost" step="0.1" min="0" class="form-control" ng-model="addRqstCtrl.request.total_cost"/>
                             </div>
                         </div>
                         <div class="col-md-12">
-                            <button class="btn btn-primary " id="addRequest" ng-click="addDessCtrl.addRequest()"> Adicionar Pedido</button>
+                            <button class="btn btn-primary " id="addRequest" ng-click="addRqstCtrl.addRequest"> Adicionar Pedido</button>
                         </div>
                     </form>
                 </div>
