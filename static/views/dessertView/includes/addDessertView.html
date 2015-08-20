@@ -58,15 +58,15 @@
                     <form name="dessertForm" style="overflow: hidden;" novalidate>
                         <div class="form-group col-md-6">
                             <label for="dessertName">Nome:</label>
-                            <input  type="text" id="dessertName" name="dessertName" class="form-control" ng-model="addDessCtrl.dessert.name" />
+                            <input  type="text" id="dessertName" name="dessertName" class="form-control" ng-model="addDessCtrl.dessert.name" required/>
                         </div>
                         <div class="col-md-6 form-group">
                             <label for="cookerName">Cozinheiro: </label>
-                            <input type="text" id="cookerName" name="cookerName" class="form-control" ng-model="addDessCtrl.dessert.cookerName"/>
+                            <input type="text" id="cookerName" name="cookerName" class="form-control" ng-model="addDessCtrl.dessert.cooker_name" required/>
                         </div>
                         <div class="col-md-6 form-group">
                             <label for="portionAmount">Número de Porções:</label>
-                            <input type="number" id="portionAmount" name="portionAmount" min="0" class="form-control" ng-model="addDessCtrl.dessert.portionAmount"/>
+                            <input type="number" id="portionAmount" name="portionAmount" min="1" class="form-control" ng-model="portion_amount" required/>
                         </div>
                         <div class="col-md-6 form-group">
                             <label class="control-label"> Preço de custo:</label>
@@ -88,48 +88,47 @@
 
                             <div class="col-md-4 form-group amountInput" ng-show="addIngre.addIngredientFlag">
                                 <label for="ingredientAmount">Quantidade: </label>
-                                <input type="number" id="ingredientAmount" name="ingredientAmount" min="0" step="0.1" class="form-control"
+                                <input type="number" id="ingredientAmount" name="ingredientAmount" min="0.001" step="0.1" class="form-control"
                                        ng-model="addIngre.myIngdnt.quantity"
-                                       ng-required="true"/>
+                                       required/>
                             </div>
                             <div class="col-md-2 form-group" ng-show="addIngre.addIngredientFlag">
-                                <button id="addIngredientBtn" class="btn btn-primary addToDessertBtn" ng-click="addDessCtrl.addIngredient(addIngre.myIngdnt); addIngre.clearIngredient()">
+                                <button id="addIngredientBtn" class="btn btn-primary addToDessertBtn"
+                                        ng-click="dessertForm.$valid && addDessCtrl.addIngredient(addIngre.myIngdnt); addIngre.clearIngredient()">
                                     <i class="fa fa-plus"></i><strong>Adicionar</strong>
                                 </button>
                             </div>
                         </section>
-                       < div>
-                            <table class="table table-hover">
-                                <caption>Ingredientes</caption>
-                                <tr>
-                                    <th>Nome</th>
-                                    <th>Custo</th>
-                                    <th>Quantidade</th>
-                                    <th>Ações</th>
-                                </tr>
-                                <tr ng-hide="addDessCtrl.dessert.ingredientes.length === 0" ng-repeat="ing in addDessCtrl.dessert.ingredientList">
-                                    <td>{{ing.ingredient.name}}</td>
-                                    <td>{{(ing.ingredient.total_cost*ing.quantity)/ing.ingredient.total_amount | number:2}}</td>
-                                    <td>{{ing.quantity | number:3}}</td>
-                                    <td>
-                                        <button class="btn btn-primary btn-xs" title="Editar"><span class="fa fa-edit"></span></button>
-                                        <button class="btn btn-danger btn-xs" title="Excluir"><span class="fa fa-trash-o"></span></button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td colspan="4" ng-show="addDessCtrl.dessert.ingredientes.length === 0">Não existe Ingrediente cadastrado.</td>
-                                </tr>
-                            </table>
-                            <div class="col-md-12">
-                                <div>
-                                    <a href="/static/js"><button id="backToList" class="btn btn-primary" >Voltar </button></a>
-                                </div>
-                                <div>
-                                  <button id="addDessert" class="btn btn-primary" ng-click="addDessCtrl.addDessert()"
-                                  style="margin-right: 10px;">
-                                      Adicionar</button>
-                                </div>
-
+                        <table class="table table-hover">
+                            <caption>Ingredientes</caption>
+                            <tr>
+                                <th>Nome</th>
+                                <th>Custo</th>
+                                <th>Quantidade</th>
+                                <th>Ações</th>
+                            </tr>
+                            <tr ng-hide="addDessCtrl.dessert.ingredientes.length === 0" ng-repeat="ing in addDessCtrl.dessert.ingredient_list">
+                                <td>{{ing.ingredient.name}}</td>
+                                <td>{{(ing.ingredient.total_cost*ing.quantity)/ing.ingredient.total_amount | number:2}}</td>
+                                <td>{{ing.quantity | number:3}}</td>
+                                <td>
+                                    <button class="btn btn-primary btn-xs" title="Editar"><span class="fa fa-edit"></span></button>
+                                    <button class="btn btn-danger btn-xs" title="Excluir"><span class="fa fa-trash-o"></span></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="4" ng-show="addDessCtrl.dessert.ingredientes.length === 0">Não existe Ingrediente cadastrado.</td>
+                            </tr>
+                        </table>
+                        <div class="col-md-12">
+                            <div>
+                                <a href="/static/js"><button id="backToList" class="btn btn-primary" >Voltar </button></a>
+                            </div>
+                            <div>
+                              <button id="addDessert" class="btn btn-primary" ng-click="addDessCtrl.addDessert()"
+                              style="margin-right: 10px;">
+                                  Adicionar</button>
+                            </div>
                         </div>
                     </form>
                 </div>
