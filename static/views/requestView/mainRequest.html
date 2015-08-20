@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
     <link type="text/css" rel="stylesheet" href="../stylesheets/main.css" />
     <!--<script src="js/angular-1.3.0/angular.js"></script>-->
-    <script  type="text/javascript" src="../js/appCliente.js" ></script>
+    <script  type="text/javascript" src="../../js/appCliente.js" ></script>
     <meta charset="UTF-8">
     <title>DoceClara</title>
 </head>
@@ -61,10 +61,10 @@
                             <th class="centered">Quantidade</th>
                             <th class="centered">Ações</th>
                         </tr>
-                        <tr ng-hide="addRqstCtrl.request.length === 0" ng-repeat="ing in addRqstCtrl.requestList">
-                            <td class="centered">{{ing.name}}</td>
-                            <td class="centered">{{ing.total_cost | currency:"R$"}}</td>
-                            <td class="centered">{{ing.total_amount | number:"2"}}</td>
+                        <tr ng-hide="addRqstCtrl.requestList.length === 0" ng-repeat="request in addRqstCtrl.requestList">
+                            <td class="centered">{{request.name}}</td>
+                            <td class="centered">{{request.total_cost | currency:"R$"}}</td>
+                            <td class="centered">{{request.total_amount | number:"2"}}</td>
                             <td>
                                 <div class="div-centered"><button class="btn btn-primary btn-xs" title="Editar"><span class="fa fa-edit"></span></button></div>
                                 <div class="div-centered"><button class="btn btn-danger btn-xs" title="Excluir"><span class="fa fa-trash-o"></span></button></div>
@@ -72,7 +72,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="4" ng-show="addRqstCtrl.requestList.length === 0">Não existe Pedido Cadastrado.</td>
+                            <td colspan="5" ng-show="addRqstCtrl.requestList.length === 0">Não existe Pedido Cadastrado.</td>
                         </tr>
                     </table>
                 </div>
@@ -81,12 +81,12 @@
                     <form name="requestForm" style="overflow: hidden;" novalidate>
                         <div class="col-md-8">
                             <label for="requestName" >Nome: </label>
-                            <input type="text" id="requestName" class="form-control" ng-model="addRqstCtrl.request.name"/>
-
+                            <input type="text" id="requestName" class="form-control" ng-model="addRqstCtrl.request.name">
+                         </div>
                         <div class="col-md-4 form-group">
                             <label for="requestTotalAmount">Quantidade: </label>
                             <div class="input-group">
-                                <input type="number" id="requestTotalAmount" min="0" step="0.1" class="form-control" ng-model="addRqstCtrl.request.total_amount"/>
+                                <input type="number" id="requestTotalAmount" min="0" step="0.1" class="form-control" ng-model="addRqstCtrl.request.total_amount">
 
                             </div>
                         </div>
@@ -94,7 +94,7 @@
                             <label for="requestCost">Valor: </label>
                             <div class="input-group">
                                 <div class="input-group-addon">$</div>
-                                <input type="number" id="requestCost" step="0.1" min="0" class="form-control" ng-model="addRqstCtrl.request.total_cost"/>
+                                <input type="number" id="requestCost" step="0.1" min="0" class="form-control" ng-model="addRqstCtrl.request.total_cost">
                             </div>
                         </div>
                         <div class="col-md-12">
