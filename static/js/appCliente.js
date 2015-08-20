@@ -9,7 +9,8 @@ app.controller('ClientControler', function($http){
     var self = this;
     this.clientList = [];
 
-    $http.get('/client').success(function(data){
+    $http.get('/Client').success(function(data){
+        console.log(data);
         for(var i = 0; i < data.length ; i ++){
             self.clientList.push(data[i]);
         }
@@ -25,10 +26,9 @@ app.controller('ClientControler', function($http){
 app.controller('AddClientController', function($http,$scope){
     this.client = {};
 
-
     this.addClient = function() {
         console.log("LOG: addClient function");
-        $http.post('/client', this.client).success(function(data){
+        $http.post('/Client', this.client).success(function(data){
             console.log(data);
             console.log("Objeto enviado!");
         });

@@ -90,13 +90,14 @@ class ClientService(webapp2.RequestHandler):
         newClient= Client()
         newClient.name = client["name"]
         newClient.telephone = client["telephone"]
+        newClient.put()
 
         self.response.write(newClient.name)
 
 
 app = webapp2.WSGIApplication([
- ('/Dessert', DessertService),
- ('/client', ClientService),
- ('/IngredientView', IngredientService),
- ('/request', RequestService),
+    ('/Dessert', DessertService),
+    ('/Client', ClientService),
+    ('/IngredientView', IngredientService),
+    ('/request', RequestService),
 ], debug=True)
