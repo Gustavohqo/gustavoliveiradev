@@ -39,7 +39,13 @@ class Client(ndb.Model):
 
 class IngredientService(webapp2.RequestHandler):
     def get(self):
-        ingredientList = json.dumps([ing.to_dict() for ing in Ingredient.query().fetch()])
+        ingredient = []
+        for ing in Ingredient.query().fetch():
+            temp = ing.to_dict()
+            temp['key'] = ing.key.urlsafe()
+            ingredient.append(temp)
+
+        ingredientList = json.dumps(ingredient)
         self.response.write(ingredientList)
     def post(self):
         newIngredient = json.loads(self.request.body)
@@ -52,18 +58,30 @@ class IngredientService(webapp2.RequestHandler):
 
 
 class DessertService(webapp2.RequestHandler):
+    def get_ingredient_list(self, data):
+        ing = []
+        for ingredient in data:
+            ing.append(ingredient)
+        return ing
+
     def get(self):
-        dessertList = json.dumps([dessert.to_dict() for dessert in Dessert.query().fetch()])
-        self.response.write(dessertList)
+        dessert_list = json.dumps([dessert.to_dict() for dessert in Dessert.query().fetch()])
+        self.response.write(dessert_list)
 
     def post(self):
-        logging.debug("LOG: POST-")
+        logging.debug("LOG: POST- On DessertService")
         dessert = json.loads(self.request.body)
 
         newDessert = Dessert()
         newDessert.name = dessert["name"]
+        newDessert.cooker_name = dessert["cooker_name"]
+        newDessert.numb_of_portions = dessert["portion_amount"]
+        newDessert.portion_cost = dessert["portion_cost"]
 
-        self.response.write(newDessert.name)
+        newDessert.put()
+        logging.debug(dessert["ingredient_list"])
+
+    # ___get_ingredient_list = get_ingredient_list
 
 class RequestService(webapp2.RequestHandler):
     def get(self):

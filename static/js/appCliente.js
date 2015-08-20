@@ -47,7 +47,7 @@ app.controller('AddRequestController',function($scope,$http,$q){
     this.request = {};
     this.requestList = [];
 
-    $http.get('/request').success(function(data){
+   $http.get('/request').success(function(data){
         for(var i = 0; i < data.length; i ++) {
             self.requestList.push(data[i]);
             console.log(data[i]);

@@ -111,9 +111,6 @@ app.controller('AddToDessertController',function($scope,$http){
             self.ingredientList.push(data[i]);
         }
     });
-
-
-
 });
 
 /*
