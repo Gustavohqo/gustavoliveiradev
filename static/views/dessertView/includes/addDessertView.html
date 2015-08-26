@@ -107,7 +107,7 @@
                                 <th>Quantidade</th>
                                 <th>Ações</th>
                             </tr>
-                            <tr ng-hide="addDessCtrl.dessert.ingredientes.length === 0" ng-repeat="ing in addDessCtrl.dessert.ingredient_list">
+                            <tr ng-hide="addDessCtrl.ingredient_list.length === 0" ng-repeat="ing in addDessCtrl.ingredient_list">
                                 <td>{{ing.ingredient.name}}</td>
                                 <td>{{(ing.ingredient.total_cost*ing.quantity)/ing.ingredient.total_amount | number:2}}</td>
                                 <td>{{ing.quantity | number:3}}</td>
@@ -117,7 +117,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td colspan="4" ng-show="addDessCtrl.dessert.ingredientes.length === 0">Não existe Ingrediente cadastrado.</td>
+                                <td colspan="4" class="centered" ng-show="addDessCtrl.ingredient_list.length === 0">Não existe Ingrediente cadastrado.</td>
                             </tr>
                         </table>
                         <div class="col-md-12">

@@ -31,7 +31,7 @@ app.controller('DessertControler', function($http,$scope){
 app.controller('AddDessertController', function($http,$scope){
     this.dessert = {};
     this.newIngredientFlag = false;
-    this.dessert.ingredient_list = [];
+    this.ingredient_list = [];
     $scope.cost = 0.0;
     $scope.portion_amount = 0;
 
@@ -48,10 +48,10 @@ app.controller('AddDessertController', function($http,$scope){
 
     this.getCost = function() {
         var cost = 0.0;
-        for(var i = 0; i < this.dessert.ingredient_list.length; i++){
-            console.log("custo da sobremesa: ", this.dessert.ingredient_list[i].ingredient.total_cost);
+        for(var i = 0; i < this.ingredient_list.length; i++){
+            console.log("custo da sobremesa: ", this.ingredient_list[i].ingredient.total_cost);
             var unit_cost =
-            cost = cost + (this.dessert.ingredient_list[i].ingredient.total_cost/this.dessert.ingredient_list[i].quantity);
+            cost = cost + (this.ingredient_list[i].ingredient.total_cost/this.ingredient_list[i].quantity);
         }
 
         console.log("custo da sobremesa: ", cost);
@@ -59,10 +59,25 @@ app.controller('AddDessertController', function($http,$scope){
         return cost;
     };
 
+    this.getIngredientRefer = function(){
+        var newIngList = [];
+        for(var i = 0; i < this.ingredient_list.length; i++){
+            console.log(this.ingredient_list[i].ingredient.key);
+            console.log(this.ingredient_list[i].quantity);
+            var newIng = {};
+            newIng.key = this.ingredient_list[i].ingredient.key;
+            newIng.quantity = this.ingredient_list[i].quantity;
+            newIngList.push(newIng)    ;
+        }
+
+        return newIngList;
+    }
+
     this.addDessert = function() {
         console.log("LOG: addDessert function");
         this.dessert.portion_amount =$scope.portion_amount;
         this.dessert.portion_cost = $scope.cost;
+        this.dessert.ingredient_list = this.getIngredientRefer();
         //angular.toJson(this.dessert);
         $http.post('/Dessert', this.dessert).success(function(data){
             console.log(data);
@@ -71,14 +86,12 @@ app.controller('AddDessertController', function($http,$scope){
     };
 
     this.addIngredient = function(newIngredient){
-        //if($valid) {
-            console.log(newIngredient.ingredient.name);
-            console.log(newIngredient.quantity);
-            this.dessert.ingredient_list.push(newIngredient);
-            console.log(this.dessert.ingredient_list[0].ingredient.name);
-            $scope.cost = this.getCost();
-            console.log("custo da sobremesa: ", $scope.cost);
-        //}
+        console.log(newIngredient.ingredient.name);
+        console.log(newIngredient.quantity);
+        this.ingredient_list.push(newIngredient);
+        console.log(this.ingredient_list[0].ingredient.key);
+        $scope.cost = this.getCost();
+        console.log("custo da sobremesa: ", $scope.cost);
     };
 });
 
