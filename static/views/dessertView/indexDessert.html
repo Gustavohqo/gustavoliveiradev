@@ -67,9 +67,9 @@
                         </tr>
                         <tr ng-hide="dessertCtrl.dessertList.length === 0" ng-repeat="ing in dessertCtrl.dessertList">
                             <td class="centered">{{ing.name}}</td>
-                            <td class="centered">{{ing.total_cost | currency:"R$"}}</td>
-                            <td class="centered">Cozinheiro</td>
-                            <td>Porções</td>
+                            <td class="centered">{{ing.portion_cost | currency:"R$"}}</td>
+                            <td class="centered">{{ing.cooker_name}}</td>
+                            <td class="centered">{{ing.numb_of_portions}}</td>
                             <td>
                                 <div class="div-centered"><button class="btn btn-primary btn-xs" title="Editar"><span class="fa fa-edit"></span></button></div>
                                 <div class="div-centered"><button class="btn btn-danger btn-xs" title="Excluir"><span class="fa fa-trash-o"></span></button></div>
