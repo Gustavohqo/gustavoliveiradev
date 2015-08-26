@@ -63,9 +63,9 @@
                             <th class="centered">Telefone</th>
                             <th class="centered">Ações</th>
                         </tr>
-                        <tr ng-hide="clientCtrl.clientList.length === 0" ng-repeat="ing in clientCtrl.clientList">
-                            <td class="centered">{{ing.name}}</td>
-                            <td class="centered">{{ing.telephone}}</td>
+                        <tr ng-hide="clientCtrl.clientList.length === 0" ng-repeat="client in clientCtrl.clientList">
+                            <td class="centered">{{client.name}}</td>
+                            <td class="centered">{{client.telephone}}</td>
 
                             <td>
                                 <div class="div-centered"><button class="btn btn-primary btn-xs" title="Editar"><span class="fa fa-edit"></span></button></div>

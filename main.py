@@ -27,10 +27,21 @@ class UsedIngredient(ndb.Model):
 class Dessert(ndb.Model):
     """Model Sobremesa"""
     name = ndb.StringProperty(indexed=False)
-    ingredient = ndb.StructuredProperty(Ingredient, repeated=True)
-    numb_of_portions = ndb.IntegerProperty(indexed=False)
+    ingredient_list = ndb.StructuredProperty(UsedIngredient, repeated=True)
+    portion_amount = ndb.IntegerProperty(indexed=False)
     portion_cost = ndb.FloatProperty(indexed=False)
     cooker_name = ndb.StringProperty(indexed=False)
+
+class Request(ndb.Model):
+    name = ndb.StringProperty(indexed=False)
+    total_amount = ndb.FloatProperty(indexed=False)
+    metric = ndb.StringProperty(indexed=False)
+    total_cost = ndb.FloatProperty(indexed=False)
+
+class Client(ndb.Model):
+    """Model Cliente"""
+    name = ndb.StringProperty(indexed=False)
+    telephone = ndb.StringProperty(indexed=False)
 
 
 class Request(ndb.Model):
@@ -39,11 +50,6 @@ class Request(ndb.Model):
     metric = ndb.StringProperty(indexed=False)
     total_cost = ndb.FloatProperty(indexed=False)
 
-
-class Client(ndb.Model):
-    """Model Cliente"""
-    name = ndb.StringProperty(indexed=False)
-    telephone = ndb.StringProperty(indexed=False)
 
 
 class IngredientService(webapp2.RequestHandler):
@@ -129,8 +135,8 @@ class ClientService(webapp2.RequestHandler):
 
 
 app = webapp2.WSGIApplication([
-    ('/Dessert', DessertService),
-    ('/Client', ClientService),
-    ('/IngredientView', IngredientService),
-    ('/request', RequestService),
+ ('/Dessert', DessertService),
+ ('/Client', ClientService),
+ ('/IngredientView', IngredientService),
+ ('/RequestView', RequestService),
 ], debug=True)

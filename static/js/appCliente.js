@@ -10,6 +10,7 @@ app.controller('ClientControler', function($http){
     this.clientList = [];
 
     $http.get('/Client').success(function(data){
+        console.log(data);
         for(var i = 0; i < data.length ; i ++){
             self.clientList.push(data[i]);
         }
@@ -24,33 +25,6 @@ app.controller('ClientControler', function($http){
 *  */
 app.controller('AddClientController', function($http,$scope){
     this.client = {};
-    this.newRequestFlag = false;
-    this.client.resquestList = [];
-    $scope.cost = 0.0;
-
-    this.setNewRqstFlag = function(){
-        if(!this.newRequestFlag) {
-            this.newRequestFlag = true;
-            document.getElementByClass("ingredientButtonPlus").className +=" ingredientButtonMinor";
-        }else{
-            this.newRequestFlag=false;
-        }
-
-        console.log(this.newRequestFlag);
-    };
-
-    this.getCost = function() {
-        var cost = 0.0;
-        for(var i = 0; i < this.client.resquestList.length; i++){
-            console.log("custo dos pedidos: ", this.client.resquestList[i].request.total_cost);
-            var unit_cost =
-            cost = cost + (this.client.resquestList[i].request.total_cost/this.client.resquestList[i].quantity);
-        }
-
-        console.log("custo dos pedidos: ", cost);
-        cost = cost/this.client.portionAmount;
-        return cost;
-    };
 
     this.addClient = function() {
         console.log("LOG: addClient function");
@@ -60,49 +34,8 @@ app.controller('AddClientController', function($http,$scope){
         });
     };
 
-    this.addRequest = function(newRequest){
-        console.log(newRequest.request.name);
-        console.log(newRequest.quantity);
-        this.client.resquestList.push(newRequest);
-        console.log(this.client.resquestList[0].request.name);
-        $scope.cost = this.getCost();
-    };
-});
-
-/*
-*
-*  CONTROLLER TO ADD A REQUEST TO A CLIENT AT CLIENT VIEW
-*
-* */
-app.controller('AddToRequestController',function($scope,$http){
-    var self = this;
-    this.myRqst = {};
-    this.requestList = [];
-    this.addRequestFlag = false;
-
-    this.selectRequest = function(){
-      if(this.myRqst.request !== null){
-          this.addRequestFlag = true;
-      }else {
-          this.addRequestFlag = false;
-      }
-    };
-
-    this.clearRequest = function (){
-        this.myRqst = {};
-        this.addRequestFlag = false;
-    };
-
-    $http.get('/RequestView').success(function(data){
-        for(var i = 0; i < data.length ; i ++){
-            self.resquestList.push(data[i]);
-        }
-    });
-
-
 
 });
-
 
 /*
 *
@@ -110,12 +43,11 @@ app.controller('AddToRequestController',function($scope,$http){
 *
 **/
 app.controller('AddRequestController',function($scope,$http,$q){
-    this.request = {};
-    $scope.metric = {};
     var self = this;
+    this.request = {};
     this.requestList = [];
 
-    $http.get('/RequestView').success(function(data){
+   $http.get('/request').success(function(data){
         for(var i = 0; i < data.length; i ++) {
             self.requestList.push(data[i]);
             console.log(data[i]);
@@ -123,13 +55,14 @@ app.controller('AddRequestController',function($scope,$http,$q){
     });
 
    this.addRequest = function(){
-       this.request.metric = $scope.metric.name;
-       console.log(this.request.name);
-       console.log(this.request.metric);
-       console.log(this.request.total_cost);
-       console.log(this.request.request_quant);
 
-       $http.post('/RequestView',this.request).success(function(data){
+       console.log(this.request.name);
+       console.log(this.request.total_amount);
+
+       console.log(this.request.total_cost);
+
+
+       $http.post('/request',this.request).success(function(data){
            console.log(data);
            self.requestList.push(self.request);
        });
