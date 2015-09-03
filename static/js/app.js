@@ -139,23 +139,36 @@ app.controller('AddIngredientController',function($scope,$http,$q){
     this.ingredientList = [];
 
     $http.get('/IngredientView').success(function(data){
-        for(var i = 0; i < data.length; i ++) {
+        for(var i = 0; i < data.length; i++) {
             self.ingredientList.push(data[i]);
             console.log(data[i]);
         }
     });
 
+    this.delete = function(ingredient) {
+        var ingToDelete = ingredient;
+        this.key = ingredient.key;
+        console.log(ingToDelete);
+        $http.delete('/IngredientView/'+ingToDelete.key).success(function(data){
+            self.ingredientList = [];
+            for(var i = 0; i < data.length; i++) {
+                console.log("Entrou, data: ", data[i]);
+                self.ingredientList.push(data[i]);
+                console.log(data[i]);
+            }
+        });
+
+    }
+
    this.addIngredient = function(){
        this.ingredient.metric = $scope.metric.name;
-       console.log(this.ingredient.name);
-       console.log(this.ingredient.metric);
-       console.log(this.ingredient.total_cost);
-       console.log(this.ingredient.total_amount);
        $http.post('/IngredientView',this.ingredient).success(function(data){
-           console.log(data);
-           self.ingredientList.push(self.ingredient);
-           self.ingredient = {};
-           $scope.metric = {};
+           self.ingredientList = [];
+           for(var i = 0; i < data.length; i++) {
+                console.log("Entrou, data: ", data[i]);
+                self.ingredientList.push(data[i]);
+                console.log(data[i]);
+            }
        });
    };
 

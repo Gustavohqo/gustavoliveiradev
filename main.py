@@ -1,11 +1,12 @@
-import logging
-from google.appengine.ext.db import to_dict
-
 __author__ = 'Gustavo'
 import cgi
 import urllib
 
+
+from google.appengine.ext.db import to_dict
 from google.appengine.ext import ndb
+
+import logging
 import json
 
 
@@ -53,6 +54,15 @@ class Request(ndb.Model):
 
 
 class IngredientService(webapp2.RequestHandler):
+    @classmethod
+    def get_ingredient_list(cls):
+        ingredient_list = []
+        for ing in Ingredient.query().fetch():
+            temp = ing.to_dict()
+            temp['key'] = ing.key.urlsafe()
+            ingredient_list.append(temp)
+        return ingredient_list
+
     def get(self):
         ingredient = []
         for ing in Ingredient.query().fetch():
@@ -60,7 +70,7 @@ class IngredientService(webapp2.RequestHandler):
             temp['key'] = ing.key.urlsafe()
             ingredient.append(temp)
 
-        ingredientList = json.dumps(ingredient)
+        ingredientList = json.dumps(self.get_ingredient_list())
         self.response.write(ingredientList)
 
     def post(self):
@@ -70,8 +80,21 @@ class IngredientService(webapp2.RequestHandler):
         ingredient.total_amount = newIngredient["total_amount"]
         ingredient.metric = newIngredient["metric"]
         ingredient.total_cost = newIngredient["total_cost"]
-        ingredient.put()
 
+        try:
+            ingredient.key.put()
+            logging.info(len(self.get_ingredient_list()))
+            self.response.write(json.dumps(self.get_ingredient_list()))
+        except ValueError:
+            logging.info("There is some messed up on Ingredient POST" + ValueError.message)
+
+    def delete(self, key):
+        data = ndb.Key(urlsafe=key).get().key
+        try:
+            data.delete()
+            self.response.write(json.dumps(self.get_ingredient_list()))
+        except ValueError:
+            logging.info("There is some messed up on Ingredient DELETE" + ValueError.message)
 
 class DessertService(webapp2.RequestHandler):
     @classmethod
@@ -79,7 +102,6 @@ class DessertService(webapp2.RequestHandler):
         ing = []
         for ingredient in data:
             used_ingredient = UsedIngredient()
-            logging.debug('Tamanho da Key: %d', len(ingredient['key']))
             used_ingredient.ingredient = ndb.Key(urlsafe=ingredient['key']).get()
             used_ingredient.total_amount = ingredient['quantity']
             ing.append(used_ingredient)
@@ -135,8 +157,9 @@ class ClientService(webapp2.RequestHandler):
 
 
 app = webapp2.WSGIApplication([
- ('/Dessert', DessertService),
- ('/Client', ClientService),
- ('/IngredientView', IngredientService),
- ('/RequestView', RequestService),
+    webapp2.Route(r'/Dessert', handler=DessertService, name='Dessert'),
+    webapp2.Route(r'/Client', handler=ClientService, name='Client'),
+    webapp2.Route(r'/IngredientView/<key>', handler=IngredientService, name='IngredientView'),
+    webapp2.Route(r'/IngredientView', handler=IngredientService, name='IngredientView'),
+    # (r'/RequestView', RequestService),
 ], debug=True)
