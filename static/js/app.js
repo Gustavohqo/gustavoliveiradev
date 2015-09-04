@@ -14,7 +14,7 @@ app.controller('DessertControler', function($http,$scope){
     var self = this;
     this.dessertList = [];
     $scope.currentPage= 1;
-    dessert = {}
+
     $http.get('/Dessert').success(function(data){
         for(var i = 0; i < data.length ; i ++){
             self.dessertList.push(data[i]);
@@ -28,13 +28,23 @@ app.controller('DessertControler', function($http,$scope){
 *  ADD_DESSERT VIEW
 *
 *  */
-app.controller('AddDessertController', function($http,$scope,$window,$location){
+app.controller('AddDessertController', function($http,$scope){
     this.dessert = {};
     this.newIngredientFlag = false;
     this.ingredient_list = [];
-    //var wind = $window;
     $scope.cost = 0.0;
     $scope.portion_amount = 0;
+
+    this.setNewIngrtFlag = function(){
+        if(!this.newIngredientFlag) {
+            this.newIngredientFlag = true;
+            document.getElementByClass("ingredientButtonPlus").className +=" ingredientButtonMinor";
+        }else{
+            this.newIngredientFlag=false;
+        }
+
+        console.log(this.newIngredientFlag);
+    };
 
     this.getCost = function() {
         var cost = 0.0;
@@ -72,10 +82,6 @@ app.controller('AddDessertController', function($http,$scope,$window,$location){
         $http.post('/Dessert', this.dessert).success(function(data){
             console.log(data);
             console.log("Objeto enviado!");
-            $window.location.href = '/dessert';
-        }).error(function(data){
-            console.log("There is nothing to put on the Database");
-
         });
     };
 
@@ -132,24 +138,37 @@ app.controller('AddIngredientController',function($scope,$http,$q){
     var self = this;
     this.ingredientList = [];
 
-    $http.get('/IngredientView', {params:{name:'Biscoito Maisena'}}).success(function(data){
-        for(var i = 0; i < data.length; i ++) {
+    $http.get('/IngredientView').success(function(data){
+        for(var i = 0; i < data.length; i++) {
             self.ingredientList.push(data[i]);
             console.log(data[i]);
         }
     });
 
+    this.delete = function(ingredient) {
+        var ingToDelete = ingredient;
+        this.key = ingredient.key;
+        console.log(ingToDelete);
+        $http.delete('/IngredientView/'+ingToDelete.key).success(function(data){
+            self.ingredientList = [];
+            for(var i = 0; i < data.length; i++) {
+                console.log("Entrou, data: ", data[i]);
+                self.ingredientList.push(data[i]);
+                console.log(data[i]);
+            }
+        });
+
+    }
+
    this.addIngredient = function(){
        this.ingredient.metric = $scope.metric.name;
-       console.log(this.ingredient.name);
-       console.log(this.ingredient.metric);
-       console.log(this.ingredient.total_cost);
-       console.log(this.ingredient.total_amount);
        $http.post('/IngredientView',this.ingredient).success(function(data){
-           console.log(data);
-           self.ingredientList.push(self.ingredient);
-           self.ingredient = {};
-           $scope.metric = {};
+           self.ingredientList = [];
+           for(var i = 0; i < data.length; i++) {
+                console.log("Entrou, data: ", data[i]);
+                self.ingredientList.push(data[i]);
+                console.log(data[i]);
+            }
        });
    };
 
