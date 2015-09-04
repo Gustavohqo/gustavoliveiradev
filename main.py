@@ -28,7 +28,7 @@ class Dessert(ndb.Model):
     """Model Sobremesa"""
     name = ndb.StringProperty(indexed=False)
     ingredient_list = ndb.StructuredProperty(UsedIngredient, repeated=True)
-    portion_amount = ndb.IntegerProperty(indexed=False)
+    numb_of_portions = ndb.IntegerProperty(indexed=False)
     portion_cost = ndb.FloatProperty(indexed=False)
     cooker_name = ndb.StringProperty(indexed=False)
 

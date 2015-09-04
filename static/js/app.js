@@ -14,7 +14,7 @@ app.controller('DessertControler', function($http,$scope){
     var self = this;
     this.dessertList = [];
     $scope.currentPage= 1;
-
+    dessert = {}
     $http.get('/Dessert').success(function(data){
         for(var i = 0; i < data.length ; i ++){
             self.dessertList.push(data[i]);
@@ -28,23 +28,13 @@ app.controller('DessertControler', function($http,$scope){
 *  ADD_DESSERT VIEW
 *
 *  */
-app.controller('AddDessertController', function($http,$scope){
+app.controller('AddDessertController', function($http,$scope,$window,$location){
     this.dessert = {};
     this.newIngredientFlag = false;
     this.ingredient_list = [];
+    //var wind = $window;
     $scope.cost = 0.0;
     $scope.portion_amount = 0;
-
-    this.setNewIngrtFlag = function(){
-        if(!this.newIngredientFlag) {
-            this.newIngredientFlag = true;
-            document.getElementByClass("ingredientButtonPlus").className +=" ingredientButtonMinor";
-        }else{
-            this.newIngredientFlag=false;
-        }
-
-        console.log(this.newIngredientFlag);
-    };
 
     this.getCost = function() {
         var cost = 0.0;
@@ -82,6 +72,10 @@ app.controller('AddDessertController', function($http,$scope){
         $http.post('/Dessert', this.dessert).success(function(data){
             console.log(data);
             console.log("Objeto enviado!");
+            $window.location.href = '/dessert';
+        }).error(function(data){
+            console.log("There is nothing to put on the Database");
+
         });
     };
 
@@ -138,7 +132,7 @@ app.controller('AddIngredientController',function($scope,$http,$q){
     var self = this;
     this.ingredientList = [];
 
-    $http.get('/IngredientView').success(function(data){
+    $http.get('/IngredientView', {params:{name:'Biscoito Maisena'}}).success(function(data){
         for(var i = 0; i < data.length; i ++) {
             self.ingredientList.push(data[i]);
             console.log(data[i]);
