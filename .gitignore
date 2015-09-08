@@ -108,6 +108,8 @@ docs/_build/
 # PyBuilder
 target/
 
+# angular satic
 static/js/angular-1.3.0
 
-
+#bower component
+static/bower_components

@@ -82,8 +82,7 @@ class IngredientService(webapp2.RequestHandler):
         ingredient.total_cost = newIngredient["total_cost"]
 
         try:
-            ingredient.key.put()
-            logging.info(len(self.get_ingredient_list()))
+            ingredient.put()
             self.response.write(json.dumps(self.get_ingredient_list()))
         except ValueError:
             logging.info("There is some messed up on Ingredient POST" + ValueError.message)
@@ -95,6 +94,7 @@ class IngredientService(webapp2.RequestHandler):
             self.response.write(json.dumps(self.get_ingredient_list()))
         except ValueError:
             logging.info("There is some messed up on Ingredient DELETE" + ValueError.message)
+
 
 class DessertService(webapp2.RequestHandler):
     @classmethod
@@ -119,12 +119,11 @@ class DessertService(webapp2.RequestHandler):
         newDessert = Dessert()
         newDessert.name = dessert["name"]
         newDessert.cooker_name = dessert["cooker_name"]
-        self.get_ingredient_list(dessert["ingredient_list"])
+        newDessert.ingredient_list = self.get_ingredient_list(dessert["ingredient_list"])
         newDessert.numb_of_portions = dessert["portion_amount"]
         newDessert.portion_cost = dessert["portion_cost"]
 
         newDessert.put()
-
 
 
 class RequestService(webapp2.RequestHandler):
@@ -161,5 +160,5 @@ app = webapp2.WSGIApplication([
     webapp2.Route(r'/Client', handler=ClientService, name='Client'),
     webapp2.Route(r'/IngredientView/<key>', handler=IngredientService, name='IngredientView'),
     webapp2.Route(r'/IngredientView', handler=IngredientService, name='IngredientView'),
-    # (r'/RequestView', RequestService),
+    webapp2.Route(r'/RequestView', handler=RequestService, name="RequestView"),
 ], debug=True)

@@ -1,4 +1,4 @@
-var app = angular.module('app',[]);
+var app = angular.module('app',["app.filters","ui.mask"]);
 
 /*
 *
@@ -25,7 +25,7 @@ app.controller('ClientControler', function($http){
 *  */
 app.controller('AddClientController', function($http,$scope){
     this.client = {};
-
+    this.client.telephone = null;
     this.addClient = function() {
         console.log("LOG: addClient function");
         $http.post('/Client', this.client).success(function(data){

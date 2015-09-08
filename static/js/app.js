@@ -38,7 +38,6 @@ app.controller('AddDessertController', function($http,$scope){
     this.setNewIngrtFlag = function(){
         if(!this.newIngredientFlag) {
             this.newIngredientFlag = true;
-            document.getElementByClass("ingredientButtonPlus").className +=" ingredientButtonMinor";
         }else{
             this.newIngredientFlag=false;
         }
@@ -71,7 +70,7 @@ app.controller('AddDessertController', function($http,$scope){
         }
 
         return newIngList;
-    }
+    };
 
     this.addDessert = function() {
         console.log("LOG: addDessert function");
@@ -138,12 +137,17 @@ app.controller('AddIngredientController',function($scope,$http,$q){
     var self = this;
     this.ingredientList = [];
 
-    $http.get('/IngredientView').success(function(data){
-        for(var i = 0; i < data.length; i++) {
-            self.ingredientList.push(data[i]);
-            console.log(data[i]);
-        }
-    });
+
+    this.loadPage = function() {
+        $http.get('/IngredientView').success(function (data) {
+            for (var i = 0; i < data.length; i++) {
+                self.ingredientList.push(data[i]);
+                console.log(data[i]);
+            }
+        });
+    }
+
+    this.loadPage();
 
     this.delete = function(ingredient) {
         var ingToDelete = ingredient;
@@ -152,13 +156,11 @@ app.controller('AddIngredientController',function($scope,$http,$q){
         $http.delete('/IngredientView/'+ingToDelete.key).success(function(data){
             self.ingredientList = [];
             for(var i = 0; i < data.length; i++) {
-                console.log("Entrou, data: ", data[i]);
                 self.ingredientList.push(data[i]);
-                console.log(data[i]);
             }
         });
 
-    }
+    };
 
    this.addIngredient = function(){
        this.ingredient.metric = $scope.metric.name;
@@ -169,12 +171,10 @@ app.controller('AddIngredientController',function($scope,$http,$q){
                 self.ingredientList.push(data[i]);
                 console.log(data[i]);
             }
+           self.ingredientList = [];
+           self.loadPage();
        });
    };
 
 });
-
-
-
-
 
