@@ -64,12 +64,6 @@ class IngredientService(webapp2.RequestHandler):
         return ingredient_list
 
     def get(self):
-        ingredient = []
-        for ing in Ingredient.query().fetch():
-            temp = ing.to_dict()
-            temp['key'] = ing.key.urlsafe()
-            ingredient.append(temp)
-
         ingredientList = json.dumps(self.get_ingredient_list())
         self.response.write(ingredientList)
 
@@ -140,8 +134,18 @@ class RequestService(webapp2.RequestHandler):
         request.put()
 
 class ClientService(webapp2.RequestHandler):
+    @classmethod
+    def get_client_list(cls):
+        client_list = []
+        for client in Client.query().fetch():
+            temp = client.to_dict()
+            temp['key'] = client.key.urlsafe()
+            client_list.append(temp)
+
+        return client_list
+
     def get(self):
-        clientList = json.dumps([client.to_dict() for client in Client.query().fetch()])
+        clientList = json.dumps(self.get_client_list())
         self.response.write(clientList)
 
     def post(self):
@@ -152,12 +156,21 @@ class ClientService(webapp2.RequestHandler):
         newClient.name = client["name"]
         newClient.telephone = client["telephone"]
         newClient.put()
-        self.response.write(newClient.name)
+
+    def delete(self, key):
+        data = ndb.Key(urlsafe=key).get().key
+        try:
+            data.delete()
+            list = json.dumps(self.get_client_list())
+            self.response.write(list)
+        except ValueError:
+            logging.info("There is some messed up on Ingredient DELETE" + ValueError.message)
 
 
 app = webapp2.WSGIApplication([
     webapp2.Route(r'/Dessert', handler=DessertService, name='Dessert'),
     webapp2.Route(r'/Client', handler=ClientService, name='Client'),
+    webapp2.Route(r'/Client/<key>', handler=ClientService, name='ClientDelete'),
     webapp2.Route(r'/IngredientView/<key>', handler=IngredientService, name='IngredientView'),
     webapp2.Route(r'/IngredientView', handler=IngredientService, name='IngredientView'),
     webapp2.Route(r'/RequestView', handler=RequestService, name="RequestView"),

@@ -9,13 +9,22 @@ app.controller('ClientControler', function($http){
     var self = this;
     this.clientList = [];
 
+    // GET
     $http.get('/Client').success(function(data){
-        console.log(data);
         for(var i = 0; i < data.length ; i ++){
             self.clientList.push(data[i]);
         }
-        console.log(data.length);
     });
+
+    // DELETE
+    this.deleteClient = function(key){
+        $http.delete('/Client/' + key).success(function(data){
+            self.clientList = [];
+            for(var i = 0; i < data.length ; i ++){
+                self.clientList.push(data[i]);
+            }
+        });
+    }
 });
 
 /*
@@ -23,18 +32,15 @@ app.controller('ClientControler', function($http){
 *  ADD_CLIENT VIEW
 *
 *  */
-app.controller('AddClientController', function($http,$scope){
+app.controller('AddClientController', function($http,$scope, $window){
     this.client = {};
     this.client.telephone = null;
     this.addClient = function() {
-        console.log("LOG: addClient function");
         $http.post('/Client', this.client).success(function(data){
             console.log(data);
-            console.log("Objeto enviado!");
         });
+        $window.location.href = "/client"
     };
-
-
 });
 
 /*
